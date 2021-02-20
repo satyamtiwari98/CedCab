@@ -1,0 +1,57 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+body {
+    
+}
+
+.loginform{
+    padding: 30px;
+    height: auto;
+    
+}
+
+
+#loginForm {
+    border: 2px solid brown;
+    padding:10px;
+    width: 50%;
+}
+
+
+.loginheading {
+    padding: 20px;
+    text-align: center;
+    color: green;
+}
+
+.registerHeading {
+    padding: 20px;
+    text-align: center;
+    color: green;
+}
+
+.register {
+    padding: 20px;
+    height: auto;
+}
+
+#register {
+    border: 2px solid brown;
+    padding: 10px;
+    width: 50%;
+}
+
+
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+a {
+    text-decoration: none;
+}
