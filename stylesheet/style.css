@@ -5,12 +5,12 @@
 }
 
 body {
-    
+    height: 100vh;
 }
 
 .loginform{
     padding: 30px;
-    height: auto;
+    height: 80vh;
     
 }
 
@@ -46,12 +46,83 @@ body {
 }
 
 
-footer{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
+
 a {
     text-decoration: none;
+}
+
+h1,h4 {
+
+    text-align: center;
+    color: green;
+
+}
+
+
+h5 {
+
+    text-align: center;
+
+}
+
+
+p {
+
+    color: grey;
+    text-align: center;
+
+}
+
+
+a {
+
+    color:green;
+
+}
+
+
+#formSectionH2 {
+
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+    background-color: blueviolet;
+
+}
+
+
+.formSection {
+
+    margin: 30px;
+    background-color: white;
+    width: 30%;
+    border-radius: 10px;
+
+}
+
+
+.main {
+
+    margin: auto;
+    padding: 10px;
+
+
+}
+
+
+.mySelect {
+
+    padding: 10px;
+
+}
+
+
+.myBtn {
+
+    float: right;
+
+}
+
+b{
+    color: brown;
 }
