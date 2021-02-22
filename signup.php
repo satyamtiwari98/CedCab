@@ -1,27 +1,4 @@
-<?php
-
-  include "Class/User.php";
-  include "template/header.php";
-
-
-  if(isset($_POST['signupSubmit'])){
-
-    $email_id = $_POST['email'];
-    $name = $_POST['name'];
-    $password = $_POST['password'];
-    $mobile = $_POST['mobile'];
-
-    $UserObject = new User();
-    $result = $UserObject->SignUp($email_id,$name,$password,$mobile);
-
-    if($result==1){
-      header('location:login.php');
-    }else{
-      echo "Sorry You Cannot Register!!!";
-    }
-  }
-
-?>
+<?php  include "template/header.php"; ?>
 <div class="register">
     <h1 class="registerHeading">Registeration Form</h1>
 
@@ -55,4 +32,123 @@
 </form>
 
 </div>
+
 <?php include "template/footer.php"; ?>
+
+<script>
+$(document).ready(function(){
+  $('#email').on('change',function(e){
+    e.preventDefault();
+    var mail = $('#email').val();
+    $.ajax({
+      url:'Helper.php',
+      type:'POST',
+      data:{
+        'email':mail,
+        'action':'CheckEmail'
+      },
+      success:function(res){
+        console.log(res);
+        if(res==2){
+
+          $('#emailHelp').html("Email Entered is already registered try another one..!!!");
+        $( "#mobile" ).prop( "disabled", true );
+        $( "#password" ).prop( "disabled", true );
+
+
+        }else{
+
+          $('#emailHelp').html("We'll never share your email with anyone else.");
+        $( "#mobile" ).prop( "disabled", false );
+        $( "#password" ).prop( "disabled", false );
+      
+        }
+       
+      }
+    });
+
+  });
+
+  $('#mobile').on('change',function(e){
+    e.preventDefault();
+    var mobile = $('#mobile').val();
+    $.ajax({
+      url:'Helper.php',
+      type:'POST',
+      data:{
+        'mobile':mobile,
+        'action':'CheckMobile',
+      },
+      success:function(res){
+        console.log(res);
+        if(res==2){
+
+          $('#mobileHelp').html("Mobile Entered is already registered try another one..!!!");
+
+        }else{
+
+          $('#emailHelp').html("We'll never share your mobile with anyone else.");
+      
+        }
+       
+      }
+    });
+
+  });
+
+  $('#signupSubmit').on('click',function(e){
+    e.preventDefault();
+    var name = $('#name').val();
+    var email = $('#email').val();
+    var mobile = $('#mobile').val();
+    var password = $('#password').val();
+
+
+    $.ajax({
+            url:'emailVerification.php',
+            type:'POST',
+            data:{
+              'email':email,
+            },
+            success:function(otp){
+              console.log('Otp'+otp);
+              var otpre = prompt("Enter Otp Reciecved on your email id :- ");
+              if(otpre==otp){
+                alert("Congrats OTP Verified Successfully");
+                $.ajax({
+                         url:'Helper.php',
+                          type:'POST',
+                          data:{
+                            'name':name,
+                            'email':email,
+                            'mobile':mobile,
+                            'password':password,
+                            'action':'SignUp',
+                              },
+                           success:function(res){
+                              console.log(res);
+                            if(res==1){
+                            // var email = $('#email').val();
+                            alert("Registered Successfully !!!");
+                            $(window).attr("location","login.php");
+                                // window.location.href('user/index.php');
+                          // $(window).attr("location","login.php");
+                            }else{
+                                  alert("OOPS something is wrong try again!!!")
+                                 }
+                             }
+                            });
+              }else{
+                alert("Otp entered By is wrong!!!");
+              }
+            }
+          });
+
+   
+
+ 
+  })
+
+
+});
+</script>

@@ -21,26 +21,12 @@
   <label class="input-group-text" for="pickUp">PickUP</label>
   <select name="Pickup" class="form-select pick" id="pickUp" required>
     <option selected>PickUP Location</option>
-    <?php 
-    foreach($location as $pickup => $pickup_value) {
-        ?>
-        <option value="<?php echo $pickup;?>"><?php echo $pickup;?></option>
-        <?php
-    }
-    ?>
   </select>
 </div>
 <div class="input-group mb-3 mySelect">
   <label class="input-group-text" for="drop">Drop</label>
   <select name="Drop" class="form-select drop" id="drop" required >
     <option selected>Drop Location</option>
-    <?php 
-    foreach($location as $drop => $drop_value) {
-        ?>
-        <option value="<?php echo $drop;?>"><?php echo $drop;?></option>
-        <?php
-    }
-    ?>
   </select>
 </div>
 <div class="input-group mb-3 mySelect">

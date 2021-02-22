@@ -1,28 +1,4 @@
-<?php
-    include "Class/User.php";
-    include "template/header.php";
-
-    if(isset($_POST['submitLogin'])){
-        $email_id = $_POST['email'];
-        $password = $_POST['password'];
-        $UserObject = new User();
-        $result = $UserObject->LoginCheck($email_id,$password);
-
-        if ($result==1) {
-            header('location: admin/index.php');
-        }
-        elseif ($result == 0) {
-            header('location: user/index.php');
-        }
-        else if($result == -1){
-            echo "Your account is been blocked by admin !";
-        }
-        else{
-            echo "You have entered wrong email / password !";
-        }
-    }
-
- ?>
+<?php  include "template/header.php"; ?>
 <h1 class="loginheading">Login Form</h1>
 <div class="loginform">
 <form method="POST" action="" id="loginForm">
@@ -45,4 +21,46 @@
 </form>
 </div>
 
+
 <?php include "template/footer.php"; ?>
+
+<script>
+$(document).ready(function(){
+  $('#submitLogin').click(function(e){
+    e.preventDefault();
+    var email = $('#email').val();
+    var password = $('#password').val();
+    $.ajax({
+      url:'Helper.php',
+      type:'POST',
+      data:{
+        'email':email,
+        'password':password,
+        'action':'LoginCheck',
+      },
+      success:function(res){
+        console.log(res);
+
+        if (res==1) {
+            // header('location: admin/index.php');
+            alert("Congrats Admin!!! You have successfully Logged In.");
+            $(window).attr("location","admin/index.php");
+        }
+        else if (res== 0) {
+            // header('location: user/index.php');
+            alert("Congrats !!! You have successfully Logged In.");
+            $(window).attr("location","user/index.php");
+        }
+        else if(res == -1){
+            alert('Your account is been blocked by admin !!!');
+        }
+        else{
+            alert('You have entered wrong email / password !!!');
+        }
+      }
+    })
+  })
+});
+</script>
+
+
