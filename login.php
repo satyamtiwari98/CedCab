@@ -42,12 +42,12 @@ $(document).ready(function(){
         console.log(res);
 
         if (res==1) {
-            // header('location: admin/index.php');
+            
             alert("Congrats Admin!!! You have successfully Logged In.");
             $(window).attr("location","admin/index.php");
         }
         else if (res== 0) {
-            // header('location: user/index.php');
+          
             alert("Congrats !!! You have successfully Logged In.");
             $(window).attr("location","user/index.php");
         }

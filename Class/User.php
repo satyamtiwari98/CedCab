@@ -1,6 +1,6 @@
 <?php
 
-include 'Dbcon.php';
+include_once 'Dbcon.php';
 session_start();
 
 class User extends Dbcon {
@@ -31,7 +31,7 @@ class User extends Dbcon {
         $this->password = $password;
 
         $sqlQuery = "Select * from `".self::table_user."` where `email_id`='$this->email_id' and `password`='$this->password' and `status`='1'";
-// die($sqlQuery);
+
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {
@@ -46,6 +46,7 @@ class User extends Dbcon {
                 $_SESSION['admin']['mobile'] = $user['mobile'];
                 $_SESSION['admin']['is_admin'] = $user['is_admin'];
                 $_SESSION['admin']['user_id'] = $user['user_id'];
+
 			}
 			elseif ($user['status'] == 1) {
 
@@ -55,6 +56,7 @@ class User extends Dbcon {
                 $_SESSION['user']['mobile'] = $user['mobile'];
                 $_SESSION['user']['is_admin'] = $user['is_admin'];
                 $_SESSION['user']['user_id'] = $user['user_id'];
+
 
 			}else {
 

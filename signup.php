@@ -128,11 +128,11 @@ $(document).ready(function(){
                            success:function(res){
                               console.log(res);
                             if(res==1){
-                            // var email = $('#email').val();
+                          
                             alert("Registered Successfully !!!");
                             $(window).attr("location","login.php");
-                                // window.location.href('user/index.php');
-                          // $(window).attr("location","login.php");
+            
+          
                             }else{
                                   alert("OOPS something is wrong try again!!!")
                                  }

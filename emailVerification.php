@@ -30,17 +30,10 @@ $mail->addAddress($email);
 $mail->Subject = ("$email");
 $mail->Body = 'Your OTP for Verification is: '.$otpForVerification;
 
-// echo "<h6 id='otpSent' style='display: none'>".$otpForVerification."</h6>";
 
 
 if($mail->send()) {
 
-    // echo "<div class='container-fluid'>";
-    // echo "<h1> OTP Verification</h1><br>";
-    // echo "<input type='number' id='otp' class='form-control' placeholder='Enter Your OTP ' name='num'><br>";
-    // echo "<button id='sub' class='btn btn-primary' onclick='verify()'>Submit</button><br>";
-    // echo "<h6>An OTP has been Sent to your email :- ".$email."</h6>";
-    // echo "</div>";
    echo $_SESSION['emailotp'];
 
 } else {

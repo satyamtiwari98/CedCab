@@ -36,6 +36,23 @@ class Location extends Dbcon{
 
     }
 
+    public function GetDistanceName($distance){
+
+        $this->distance = $distance;
+        $sqlQuery = "select `name` from `".self::table_location."` where `distance`='$this->distance'";
+        $result = $this->connect->query($sqlQuery);
+        if($result->num_rows>0){
+            // 
+            return $result->fetch_assoc();
+            
+        }else{
+            return "Not Found!!!";
+        }
+
+
+
+    }
+
 
 
 
