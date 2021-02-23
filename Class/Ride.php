@@ -6,6 +6,7 @@ include_once 'Dbcon.php';
 class Ride extends Dbcon {
 
     const table_ride = 'tbl_ride';
+    public $user_id;
     public $connect;
     public $ride_id;
     public $ride_date;
@@ -19,6 +20,7 @@ class Ride extends Dbcon {
     public $obj;
     public $distance1;
     public $distance2;
+    public $cabType;
 
     public function __construct()
     {
@@ -440,6 +442,28 @@ class Ride extends Dbcon {
 
        
 
+
+    }
+
+    public function BookRide($pickup,$drop,$cab,$luggage,$total,$fare,$id){
+
+        $this->pickupPoint = $pickup;
+        $this->dropPoint = $drop;
+        $this->cabType = $cab;
+        $this->luggage = $luggage;
+        $this->totalDistance = $total;
+        $this->TotalFare = $fare;
+        $this->user_id = $id;
+
+        $sqlQuery = "insert into `".self::table_ride."` (`ride_date`,`from`,`to`,`cab_type`,`total_distance`,`luggage`,`total_fare`,`status`,`customer_user_id`) values (now(),'$this->pickupPoint','$this->dropPoint','$this->cabType','$this->totalDistance','$this->luggage','$this->TotalFare','1','$this->user_id')";
+        // die($sqlQuery);
+
+        // $result = $this->connect->query($sqlQuery);
+        if ($this->connect->query($sqlQuery) == TRUE) {
+            return 1;
+          } else {
+         return 0;
+          }
 
     }
 

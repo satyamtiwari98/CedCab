@@ -126,3 +126,14 @@ a {
 b{
     color: brown;
 }
+
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.card{
+    margin: auto;
+    padding: 20px;
+}

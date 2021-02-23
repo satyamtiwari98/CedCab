@@ -104,7 +104,23 @@ if(isset($_POST['action'])){
                 echo "0";
 
             }
-            
+
+            break;
+        case 'BookRide':
+            $pickup = $_POST['pickup'];
+            $drop = $_POST['drop'];
+            $cab = $_POST['cab'];
+            $luggage = $_POST['luggage'];
+            $fare = $_POST['fare'];
+            $totalDistance = $_POST['total'];
+            $user = $_POST['user'];
+            $userObject = new User();
+            $user_id = $userObject->GetID($user);
+
+            $rideObject = new Ride();
+            $result = $rideObject->BookRide($pickup,$drop,$cab,$luggage,$fare,$totalDistance,$user_id['user_id']);
+            echo $result;
+
             break;
     
 

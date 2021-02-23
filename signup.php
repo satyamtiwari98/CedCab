@@ -102,7 +102,7 @@ $(document).ready(function(){
     var email = $('#email').val();
     var mobile = $('#mobile').val();
     var password = $('#password').val();
-
+  if(name != ''&& email != '' && mobile != '' && password != ''){
 
     $.ajax({
             url:'emailVerification.php',
@@ -143,6 +143,7 @@ $(document).ready(function(){
               }
             }
           });
+        }
 
    
 

@@ -6,7 +6,7 @@ function luggageNotAllowed() {
     if(a == 'CedMicro') {
     
         luggage.disabled = true;
-        luggage.value = "not allowed";
+        luggage.value = "notAllowed";
         luggage.placeholder = "Luggage Facility is not allowed for Ced Micro";
 
     }else {
@@ -50,6 +50,7 @@ $(document).ready(function () {
               var arr = JSON.parse(res);
           
             $('.modal-body').html("<p>PickUp Point : <b style='color:brown'>"+arr[0]+"</b></p><p>Drop Point : <b style='color:brown'>"+arr[1]+"</b></p><p>CabType : <b style='color:brown'>"+arr[2]+"</b></p><p>TotalDistance : <b style='color:brown'>"+arr[3]+" km</b></p><p>Luggage weight : <b style='color:brown'>"+arr[4]+" kg</b></p><p>Total Fare : <b style='color:brown'>Rs."+arr[5]+"</b></p>");
+
             $('#my').modal('show');
 
               }
@@ -114,6 +115,7 @@ $('#BookRide').click(function(){
         success:function(res){
             if(res==1) {
                 $(window).attr("location","user/index.php");
+               
             }else{
                 alert("Please login To book Ride");
                 $(window).attr("location","login.php");

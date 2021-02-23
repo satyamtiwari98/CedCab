@@ -134,6 +134,23 @@ class User extends Dbcon {
 
     }
 
+    public function GetID($user){
+
+        $this->email_id = $user;
+
+        $sqlQuery = "select `user_id` from `".self::table_user."` where `email_id`='$this->email_id'";
+// die($sqlQuery);
+        $result = $this->connect->query($sqlQuery);
+        if($result->num_rows>0){
+            // 
+            return $result->fetch_assoc();
+            
+        }else{
+            return "Not Found!!!";
+        }
+        
+    }
+
     public function SignUp($email_id,$name,$password,$mobile) {
 
         try {

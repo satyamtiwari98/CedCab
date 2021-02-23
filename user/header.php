@@ -1,5 +1,14 @@
 <?php
 session_start();
+if(isset($_SESSION['user']) && $_SESSION['user']['is_admin']==0) {
+
+  echo $_SESSION['user']['email_id'];
+
+}else {
+
+  die("Sorry you are not allowed to enter!!!");
+
+}
 ?>
 
 <!doctype html>
@@ -37,17 +46,12 @@ session_start();
           <a class="nav-link" href="signup.php">SignUp</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login.php">LogIn</a>
+          <a class="nav-link" href="logout.php">LogOut</a>
         </li>
         
       </ul>
     </div>
- <?php   if(isset($_SESSION['user']) && $_SESSION['user']['is_admin']==0){
-    echo $_SESSION['user']['email_id'];
-
-}else{
-    die("Sorry you are not allowed to enter!!!");
-}?>
+ <?php echo "Hello ".$_SESSION['user']['email_id'];  ?>
   </div>
 </nav>
 
