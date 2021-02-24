@@ -21,6 +21,7 @@ class Ride extends Dbcon {
     public $distance1;
     public $distance2;
     public $cabType;
+    public $data = array();
 
     public function __construct()
     {
@@ -38,6 +39,7 @@ class Ride extends Dbcon {
         $this->cabType = $cabType;
         $this->luggage = $luggage;
         $this->totalDistance = $totalDistance;
+
         $_SESSION['ride']['pickup']=$this->distance1;
         $_SESSION['ride']['drop']=$this->distance2;
         $_SESSION['ride']['cabtype']=$this->cabType;
@@ -456,14 +458,90 @@ class Ride extends Dbcon {
         $this->user_id = $id;
 
         $sqlQuery = "insert into `".self::table_ride."` (`ride_date`,`from`,`to`,`cab_type`,`total_distance`,`luggage`,`total_fare`,`status`,`customer_user_id`) values (now(),'$this->pickupPoint','$this->dropPoint','$this->cabType','$this->totalDistance','$this->luggage','$this->TotalFare','1','$this->user_id')";
-        // die($sqlQuery);
+        
 
-        // $result = $this->connect->query($sqlQuery);
+        
         if ($this->connect->query($sqlQuery) == TRUE) {
+
+            if(isset($_SESSION['ride']['pickup'])){
+                unset($_SESSION['ride']['pickup']);
+                unset($_SESSION['ride']['drop']);
+                unset($_SESSION['ride']['cabtype']);
+                unset($_SESSION['ride']['fare']);
+                unset($_SESSION['ride']['luggage']);
+                unset($_SESSION['ride']['totaldistance']);
+
+            }
+
             return 1;
+
           } else {
+
          return 0;
+
           }
+
+    }
+
+    public function GetPendingRides($user_id){
+
+        $this->user_id = $user_id;
+        $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='1'";
+
+        $result = $this->connect->query($sqlQuery);
+
+        if($result->num_rows>0) {
+            $i=0;
+            while($row = $result->fetch_assoc()) {
+                $this->data[$i] = $row;
+                ++$i;
+              }
+            
+        }
+
+        return $this->data;
+
+
+    }
+
+
+    public function GetAllRides($user_id){
+
+        $this->user_id = $user_id;
+
+        $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id'";
+        $result = $this->connect->query($sqlQuery);
+
+        if($result->num_rows>0) {
+            $i=0;
+            while($row = $result->fetch_assoc()) {
+                $this->data[$i] = $row;
+                ++$i;
+              }
+            
+        }
+
+        return $this->data;
+
+    }
+
+    public function GetCompletedRides($user_id){
+
+        $this->user_id = $user_id;
+
+        $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='2'";
+        $result = $this->connect->query($sqlQuery);
+
+        if($result->num_rows>0) {
+            $i=0;
+            while($row = $result->fetch_assoc()) {
+                $this->data[$i] = $row;
+                ++$i;
+              }
+            
+        }
+
+        return $this->data;
 
     }
 

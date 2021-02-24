@@ -28,7 +28,7 @@ if(isset($_POST['action'])){
             break;
 
 
-        case 'EmailCheck':
+        case 'CheckEmail':
             $email_id = $_POST['email'];
             $userObj = new User();
             $result = $userObj->CheckEmail($email_id);
@@ -106,6 +106,7 @@ if(isset($_POST['action'])){
             }
 
             break;
+
         case 'BookRide':
             $pickup = $_POST['pickup'];
             $drop = $_POST['drop'];
@@ -113,6 +114,8 @@ if(isset($_POST['action'])){
             $luggage = $_POST['luggage'];
             $fare = $_POST['fare'];
             $totalDistance = $_POST['total'];
+
+
             $user = $_POST['user'];
             $userObject = new User();
             $user_id = $userObject->GetID($user);
@@ -122,6 +125,37 @@ if(isset($_POST['action'])){
             echo $result;
 
             break;
+
+        case 'GetPendingRides':
+            $user_id = $_POST['user_id'];
+
+            $rideObject = new Ride();
+            $result = $rideObject->GetPendingRides($user_id);
+
+            echo json_encode($result);
+
+            break;
+
+        case 'GetAllRides':
+            $user_id = $_POST['user_id'];
+
+            $rideObject = new Ride();
+            $result = $rideObject->GetAllRides($user_id);
+
+            echo json_encode($result);
+
+            break;
+
+        case 'GetCompletedRides':
+            $user_id = $_POST['user_id'];
+
+            $rideObject = new Ride();
+            $result = $rideObject->GetCompletedRides($user_id);
+
+            echo json_encode($result);
+
+            break;
+
     
 
 

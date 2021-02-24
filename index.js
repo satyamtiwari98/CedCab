@@ -1,3 +1,6 @@
+//----------------------This function is used for cedtype : Micro where luggage is not allowed----------------
+
+
 function luggageNotAllowed() {
 
     var a = document.getElementById('cabType').value;
@@ -12,6 +15,7 @@ function luggageNotAllowed() {
     }else {
 
         luggage.disabled = false;
+        luggage.value = "";
         luggage.placeholder = "Enter Luggage in KG";
 
     }
@@ -22,9 +26,10 @@ function luggageNotAllowed() {
 
 $(document).ready(function () {
 
-    letsGetOptions();
+    letsGetOptions(); // This is function invoking on document load
 
-    
+// -------------------------------This is to activate the modal to display the booked ride details-------------------------------
+
 
   $("#subId").click(function (e) {
 
@@ -33,6 +38,9 @@ $(document).ready(function () {
       var distance2 = $('#drop').val();
       var cabtype = $('#cabType').val();
       var weight = $('#luggage').val();
+
+     
+      if(distance1 != '' && distance2 != '' && cabtype != '' && weight != '' ){
 
       $.ajax({
 
@@ -58,11 +66,21 @@ $(document).ready(function () {
            
           }
       );
+        } else {
+
+            alert("Please provide valid details!!!!");
+            
+        }
 
   });
 
 
+
+
+
 });
+
+//---------------------------------------This is to get the options in the dropdown-----------------------
 
 function letsGetOptions(){
     var select1 = $('#pickUp');
@@ -87,6 +105,8 @@ function letsGetOptions(){
     });
 }
 
+// -------------------------------------Drop and Pickup Dropdown-----------------------------------------------
+
 
 $("#pickUp").on("change",function() {
 
@@ -104,6 +124,7 @@ $("#drop").on("change",function() {
 
     });
 
+// ---------------------------------Book Ride-----------------------------------------------------------
 
 $('#BookRide').click(function(){
     $.ajax({
@@ -123,3 +144,4 @@ $('#BookRide').click(function(){
         }
     })
 })
+

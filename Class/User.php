@@ -15,6 +15,7 @@ class User extends Dbcon {
     public $status;
     public $password;
     public $is_admin;
+    public $file;
 
     public function __construct()
     {
@@ -86,7 +87,7 @@ class User extends Dbcon {
 
         $this->email_id = $email_id;
         $checkexistence = "select * from `".self::table_user."` where `email_id` = '$this->email_id'";
-
+// die($checkexistence);
         $checkexistenceResult = $this->connect->query($checkexistence);
 
         if($checkexistenceResult->num_rows>0) {
@@ -159,6 +160,7 @@ class User extends Dbcon {
         $this->name = $name;
         $this->mobile = $mobile;
         $this->password = $password;
+    
 
 
 
