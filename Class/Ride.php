@@ -27,7 +27,9 @@ class Ride extends Dbcon {
     {
         $lets_connect = new Dbcon();
         $this->connect = $lets_connect->connect;
+
     }
+
 
     public function CalculateFare($cabType,$luggage,$pickupPoint,$dropPoint,$totalDistance,$distance1,$distance2){
 
@@ -104,14 +106,14 @@ class Ride extends Dbcon {
               }else if($distance>50 && $distance<=100) {
 
                 $fare =0;
-                  $fare = 10*14.50;
-                  $distance-=10;
-                  $fare+=50*13;
-                  $distance-=50;
-                  $fare+=$distance*11.20;
-                  $fare+=$miniFixed;
+                $fare = 10*14.50;
+                $distance-=10;
+                $fare+=50*13;
+                $distance-=50;
+                $fare+=$distance*11.20;
+                $fare+=$miniFixed;
 
-                  if($this->luggage<=10) {
+                if($this->luggage<=10) {
 
                     $fare+=50;
 
@@ -127,13 +129,13 @@ class Ride extends Dbcon {
                 $_SESSION['ride']['fare']=$fare;
 
 
-                  return $fare;
+                return $fare;
 
               }else if($distance>100) {
 
                   $fare =0;
                 $fare = 10*14.50;
-                  $distance = $distance-10;
+                $distance = $distance-10;
                   $fare += 50*13;
                   $distance = $distance-50;
                   $fare += 100*11.20;
@@ -542,6 +544,43 @@ class Ride extends Dbcon {
         }
 
         return $this->data;
+
+    }
+
+    public function GetTotalExpenses($user_id){
+        $this->user_id = $user_id;
+
+        $sqlQuery = "select sum(`total_fare`) from `".self::table_ride."` where `customer_user_id` = '$this->user_id' and `status`='2'";
+// die($sqlQuery);
+        $result = $this->connect->query($sqlQuery);
+        if($result->num_rows>0){
+            $row = $result->fetch_assoc();
+        }
+        
+        // die($result[0]);
+
+        return $row;
+
+    }
+
+    public function CancelRide($ride_id) {
+
+        $this->ride_id = $ride_id;
+
+        $sqlQuery = "update `".self::table_ride."` set `status`='0' where `ride_id`='$this->ride_id' and `status`='1'";
+// die($sqlQuery);
+        $result = $this->connect->query($sqlQuery);
+
+
+        if($result == true) {
+
+            return 1;
+
+        }else {
+
+            return 0;
+
+        }
 
     }
 

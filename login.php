@@ -1,5 +1,8 @@
 <?php  
 session_start();
+
+// ------------------------------------------Session Check-----------------------------------------------
+
 if(isset($_SESSION['user']['email_id'])) {
 
   die("You are not allowed");
@@ -14,6 +17,8 @@ if(isset($_SESSION['user']['email_id'])) {
 <h1 class="loginheading">Login Form</h1>
 
 <div class="loginform">
+
+<!---------------------------------------------Login Form----------------------------------------------->
 
 <form method="POST" action="" id="loginForm">
 

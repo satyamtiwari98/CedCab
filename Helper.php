@@ -1,5 +1,6 @@
 <?php
-// session_start();
+//----------------------------------This is Helper File--------------------------------------------------------
+
     include_once "Class/User.php";
     include_once "Class/Location.php";
     include_once "Class/Ride.php";
@@ -9,7 +10,8 @@ if(isset($_POST['action'])){
 
     $action = $_POST['action'];
 
-    switch($action){
+    switch($action) {
+//---------------------------------Login Check---------------------------------------------------------------- 
         case 'LoginCheck':
             $email_id = $_POST['email'];
             $password = $_POST['password'];
@@ -27,7 +29,7 @@ if(isset($_POST['action'])){
             echo $result;
             break;
 
-
+//------------------------------------Email Check-------------------------------------------------------------
         case 'CheckEmail':
             $email_id = $_POST['email'];
             $userObj = new User();
@@ -35,6 +37,7 @@ if(isset($_POST['action'])){
             echo $result;
             break;
 
+//--------------------------------------Mobile Check-----------------------------------------------------------
 
         case 'CheckMobile':
             $mobile = $_POST['mobile'];
@@ -43,21 +46,72 @@ if(isset($_POST['action'])){
             echo $result;
             break;
 
+//---------------------------------------SingnUp or User Registeration-----------------------------------------
 
         case 'SignUp':
+            $target_dir = "uploads/";
+            $targetfile = $_FILES['file']['name'];
+            $target_file = $target_dir . basename($targetfile);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            // $target_file .=$imageFileType;
+
+
             $email_id = $_POST['email'];
             $name = $_POST['name'];
             $password = $_POST['password'];
             $mobile = $_POST['mobile'];
+
+            $check = getimagesize($_FILES["file"]["tmp_name"]);
+
+            if($check !== false) {
+
+                $uploadOk = 1;
+
+            } else {
+
+                $uploadOk = 0;
+
+            }
+
+            if (file_exists($target_file)) {
+
+                $uploadOk = 0;
+
+            }
+
+            if ($_FILES["file"]["size"] > 500000) {
+
+                    $uploadOk = 0;
+
+                }
+
+            if ($uploadOk == 0) {
+
+                echo "Sorry, your file was not uploaded.";
+
+            } else {
+
+                if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+
+                    // echo "The file ". htmlspecialchars( basename( $_FILES["file"]["name"])). " has been uploaded.";
+
+                } else {
+
+                    // echo "Sorry, there was an error uploading your file.";
+                }
+
+                }
         
             $UserObject = new User();
-            $result = $UserObject->SignUp($email_id,$name,$password,$mobile);
+            $result = $UserObject->SignUp($email_id,$name,$password,$mobile,$targetfile);
         
             echo $result;
 
             break;
 
 
+//------------------------------------To Get Options in the Pickup and Drop location dropdown------------------------------------------------
 
         case 'letsGetOption':
             $locationObject = new Location();
@@ -66,6 +120,8 @@ if(isset($_POST['action'])){
             echo json_encode($result);
 
             break;
+
+//-------------------------------------Calculate Fare---------------------------------------------------------
 
         case 'CalculateFare':
             $pickupPoint = $_POST['distance1'];
@@ -89,6 +145,8 @@ if(isset($_POST['action'])){
             echo json_encode($arr);
 
             break;
+
+// -----------------------------------------Redirect For Booking Ride------------------------------------------
         
         case 'redirectBookRide':
             if(isset($_SESSION['user']['email_id'])) {
@@ -106,6 +164,8 @@ if(isset($_POST['action'])){
             }
 
             break;
+
+// --------------------------------------Book Ride-------------------------------------------------------------
 
         case 'BookRide':
             $pickup = $_POST['pickup'];
@@ -126,6 +186,8 @@ if(isset($_POST['action'])){
 
             break;
 
+// ------------------------------------Get all Pending Rides details-------------------------------------------
+
         case 'GetPendingRides':
             $user_id = $_POST['user_id'];
 
@@ -135,6 +197,8 @@ if(isset($_POST['action'])){
             echo json_encode($result);
 
             break;
+
+// ------------------------------------Get All Rides details---------------------------------------------------
 
         case 'GetAllRides':
             $user_id = $_POST['user_id'];
@@ -146,6 +210,8 @@ if(isset($_POST['action'])){
 
             break;
 
+// -------------------------Get all completed rides details--------------------------------------------------
+
         case 'GetCompletedRides':
             $user_id = $_POST['user_id'];
 
@@ -154,6 +220,39 @@ if(isset($_POST['action'])){
 
             echo json_encode($result);
 
+            break;
+
+// -------------------------Get total expenses of a particular user--------------------------------------------
+
+        case 'GetTotalExpenses':
+            $user_id = $_POST['user_id'];
+
+            $rideObject = new Ride();
+            $result = $rideObject->GetTotalExpenses($user_id);
+            
+            echo json_encode($result);
+
+            break;
+
+// -----------------------------------Cancel Pending Rides-----------------------------------------------------
+
+        case 'CancelRide':
+            $ride_id = $_POST['ride_id'];
+
+            $rideObject = new Ride();
+            $result = $rideObject->CancelRide($ride_id);
+
+            echo $result;
+
+            break;
+
+        case 'GetUserImage':
+            $user_id = $_POST['user_id'];
+
+            $userObject = new User();
+            $result = $userObject->GetUserImage($user_id);
+
+            echo json_encode($result);
             break;
 
     

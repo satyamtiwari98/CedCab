@@ -1,5 +1,9 @@
-<?php include "template/header.php";
-    include "array.php"
+<?php 
+    
+    include_once "template/header.php";
+    include_once "array.php";
+
+
 ?>
 
 <div class="main">
@@ -7,6 +11,9 @@
 <h1>Book a City Taxi to your destination in town</h1>
 
 <h4>Choose from a range of categories and prices</h4>
+
+
+<!-------------------------------------Fare Calculation Form-------------------------------------------------->
 
 
 <div class="formSection">
@@ -54,6 +61,9 @@
 </div>
 
 </div>
+
+
+<!----------------------------------------Modal---------------------------------------------------------------------->
 
 <div class="modal" id="my" tabindex="-1">
   <div class="modal-dialog">

@@ -4,6 +4,8 @@
 
     <h1 class="registerHeading">Registeration Form</h1>
 
+<!----------------------------------------Signup Form--------------------------------------------------->
+
 <form method="POST" action="" id="register">
 
     <h3 style="color: brown; text-align:center; padding:10px;">CedCab</h3>
@@ -58,6 +60,14 @@ $(document).ready(function() {
     var email = $('#email').val();
     var mobile = $('#mobile').val();
     var password = $('#password').val();
+    var formdata = new FormData();
+
+    formdata.append('name',$('#name').val());
+    formdata.append('email',$('#email').val());
+    formdata.append('mobile',$('#mobile').val());
+    formdata.append('password',$('#password').val());
+    formdata.append('file',$('input[type=file]')[0].files[0]);
+    formdata.append('action','SignUp');
 
   if(name != ''&& email != '' && mobile != '' && password != '') {
 
@@ -71,45 +81,18 @@ $(document).ready(function() {
 
               console.log('Otp'+otp);
 
-              var otpre = prompt("Enter Otp Reciecved on your email id :- ");
+              var otpre = prompt("Enter Otp Reciecved On Your Email Id :- ");
 
               if(otpre==otp) {
 
                 alert("Congrats OTP Verified Successfully");
 
-                $.ajax({
-                         url:'Helper.php',
-                          type:'POST',
-                          data:{
-                            'name':name,
-                            'email':email,
-                            'mobile':mobile,
-                            'password':password,
-                            'action':'SignUp',
-                              },
-                           success:function(res) {
-
-                              console.log(res);
-
-                            if(res==1) {
-                          
-                            alert("Registered Successfully !!!");
-                            $(window).attr("location","login.php");
-            
-          
-                            }else {
-
-                                  alert("OOPS something is wrong try again!!!");
-
-                                 }
-
-                             }
-
-                            });
+               //------Calling function to store the whole data into database-----------
+               RigesterUser(formdata);
 
               }else {
 
-                alert("Otp entered By is wrong!!!");
+                alert("OTP Entered By is wrong!!!");
 
               }
 
@@ -119,7 +102,7 @@ $(document).ready(function() {
 
         }else {
 
-          alert("Please Provide some details first !!!!");
+          alert("Please Provide Some Details First!!!!");
 
         }
 
@@ -127,6 +110,42 @@ $(document).ready(function() {
   });
 
 });
+
+//----------------------Signup Function---------------------------------
+
+function RigesterUser(formdata){
+
+                     $.ajax({
+
+                        url:'Helper.php',
+                        type:'POST',
+                        enctype:"multipart/form-data",
+                        contentType:false,
+                        data:formdata,
+                        cache:false,
+                        processData:false,
+                        success:function(res) {
+
+                            console.log(res);
+
+                            if(res==1) {
+                          
+                            alert("Registered Successfully !!!");
+                            $(window).attr("location","login.php");
+            
+          
+                            }else {
+
+                                 alert("OOPS something is wrong try again!!!");
+
+                            }
+
+                            }
+
+                          });
+
+
+}
 
 
 // --------------------------------------Email On Change------------------------------------------------------

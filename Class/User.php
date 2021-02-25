@@ -1,11 +1,12 @@
 <?php
+// -----------------------------------This is User Class Which deals with user table---------------------------
 
 include_once 'Dbcon.php';
 session_start();
 
 class User extends Dbcon {
 
-    const table_user = 'tbl_user';
+    const table_user = 'tbl_user'; // This the table name of user
     public $connect;
     public $user_id;
     public $email_id;
@@ -23,6 +24,8 @@ class User extends Dbcon {
         $this->connect=$lets_connect->connect;
         
     }
+
+// -------------------------------------Login Check Function------------------------------------------------
 
     public function LoginCheck($email_id,$password) {
 
@@ -81,13 +84,16 @@ class User extends Dbcon {
 
     }
 
+
+// ----------------------------------------Email Check Function---------------------------------------------
+
     public function CheckEmail($email_id) {
 
         try {
 
         $this->email_id = $email_id;
         $checkexistence = "select * from `".self::table_user."` where `email_id` = '$this->email_id'";
-// die($checkexistence);
+
         $checkexistenceResult = $this->connect->query($checkexistence);
 
         if($checkexistenceResult->num_rows>0) {
@@ -108,6 +114,10 @@ class User extends Dbcon {
     }
 
     }
+
+
+// -----------------------------------Mobile Number Check Function--------------------------------------------
+
 
     public function CheckMobile($mobile) {
 
@@ -135,15 +145,17 @@ class User extends Dbcon {
 
     }
 
+// -----------------------------------This function is used to get the users id using its email id------------
+
     public function GetID($user){
 
         $this->email_id = $user;
 
         $sqlQuery = "select `user_id` from `".self::table_user."` where `email_id`='$this->email_id'";
-// die($sqlQuery);
+
         $result = $this->connect->query($sqlQuery);
         if($result->num_rows>0){
-            // 
+            
             return $result->fetch_assoc();
             
         }else{
@@ -152,7 +164,11 @@ class User extends Dbcon {
         
     }
 
-    public function SignUp($email_id,$name,$password,$mobile) {
+
+// ---------------------------------Signup or user Registration Function--------------------------------------
+
+
+    public function SignUp($email_id,$name,$password,$mobile,$targetfile) {
 
         try {
 
@@ -160,11 +176,12 @@ class User extends Dbcon {
         $this->name = $name;
         $this->mobile = $mobile;
         $this->password = $password;
+        $this->file = $targetfile;
     
 
 
 
-        $sqlQuery = "INSERT into `".self::table_user."`(`email_id`,`name`,`dateofsignup`,`mobile`,`status`,`password`,`is_admin`) values ('$this->email_id','$this->name',now(),'$this->mobile','1','$this->password','0')";
+        $sqlQuery = "INSERT into `".self::table_user."`(`email_id`,`name`,`dateofsignup`,`mobile`,`status`,`password`,`is_admin`,`img`) values ('$this->email_id','$this->name',now(),'$this->mobile','1','$this->password','0','$this->file')";
 
         $result = $this->connect->query($sqlQuery);
 
@@ -185,5 +202,33 @@ class User extends Dbcon {
     }
     
     }
+
+
+    public function GetUserImage($user_id){
+
+        $this->user_id = $user_id;
+
+        $sqlQuery = "select `img` from `".self::table_user."` where `user_id`='$this->user_id'";
+
+        $result = $this->connect->query($sqlQuery);
+
+        if($result->num_rows>0){
+            
+            return $result->fetch_assoc();
+            
+        }else{
+            return "Not Found!!!";
+        }
+
+
+    }
+
+
+
+
+
+
+
+
 
 }

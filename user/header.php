@@ -52,6 +52,7 @@ if(isset($_SESSION['user']) && $_SESSION['user']['is_admin']==0) {
       </ul>
     </div>
  <?php echo "Hello ".$_SESSION['user']['email_id'];  ?>
+ <img src="" id="userImg" alt="This is image" height="20px" width="40px"/>
   </div>
 </nav>
 
