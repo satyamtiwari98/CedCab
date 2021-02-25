@@ -1,6 +1,6 @@
 <?php 
     
-    include_once "template/header.php";
+    include_once "assets/template/header.php";
     include_once "array.php";
 
 
@@ -85,4 +85,4 @@
 
 
 
-<?php include "template/footer.php"; ?>
+<?php include "assets/template/footer.php"; ?>

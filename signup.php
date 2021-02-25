@@ -1,4 +1,4 @@
-<?php  include "template/header.php"; ?>
+<?php  include "assets/template/header.php"; ?>
 
 <div class="register">
 
@@ -44,7 +44,7 @@
 
 </div>
 
-<?php include "template/footer.php"; ?>
+<?php include "assets/template/footer.php"; ?>
 
 <script>
 

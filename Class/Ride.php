@@ -449,7 +449,7 @@ class Ride extends Dbcon {
 
     }
 
-    public function BookRide($pickup,$drop,$cab,$luggage,$total,$fare,$id){
+    public function BookRide($pickup,$drop,$cab,$luggage,$fare,$total,$id){
 
         $this->pickupPoint = $pickup;
         $this->dropPoint = $drop;
@@ -532,6 +532,26 @@ class Ride extends Dbcon {
         $this->user_id = $user_id;
 
         $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='2'";
+        $result = $this->connect->query($sqlQuery);
+
+        if($result->num_rows>0) {
+            $i=0;
+            while($row = $result->fetch_assoc()) {
+                $this->data[$i] = $row;
+                ++$i;
+              }
+            
+        }
+
+        return $this->data;
+
+    }
+
+    public function GetCancelledRides($user_id){
+
+        $this->user_id = $user_id;
+
+        $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='0'";
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {

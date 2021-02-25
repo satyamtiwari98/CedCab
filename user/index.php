@@ -1,21 +1,10 @@
 <?php
-include_once "header.php";
+include_once "assets/template/header.php";
 
 // session_destroy();
 ?>
 
 <div class="dashboard">
-
-<div class="card" style="width: 18rem;">
- 
-  <div class="card-body">
-    <h5 class="card-title">Completed Rides</h5>
-    <h2 style="color: brown; text-align:center; padding:20px;" id="TotalCompletedRides"></h2>
-
-    <button style="text-align: center;" type="button" class="btn btn-success" id="GetCompletedRides">Get Completed Rides</button>
-  </div>
-</div>
-
 
 <div class="card" style="width: 18rem;">
   
@@ -24,6 +13,33 @@ include_once "header.php";
     <h2 style="color: brown; text-align:center; padding:20px;" id="TotalPendingRides"></h2>
     
     <button style="text-align: center;" type="button" class="btn btn-success" id="GetPendingRides">Get Pending Rides</button>
+  </div>
+</div>
+
+
+<div class="card" style="width: 18rem;">
+ 
+  <div class="card-body">
+    <h5 class="card-title">Cancelled Rides</h5>
+    <h2 style="color: brown; text-align:center; padding:20px;" id="TotalCancelledRides"></h2>
+
+    <button style="text-align: center;" type="button" class="btn btn-success" id="GetCancelledRides">Get Cancelled Rides</button>
+  </div>
+</div>
+
+
+
+
+
+<div class="card" style="width: 18rem;">
+
+  <div class="card-body">
+    <h5 class="card-title">Total Expenses</h5>
+    <h2 style="color: brown; text-align:center; padding:20px;" id="TotalExpenses"></h2>
+    <h2 style="color: brown; text-align:center; padding:20px;" id="TotalCompletedRides"></h2>
+
+    <button style="text-align: center;" type="button" class="btn btn-success" id="GetCompletedRides">Get All Completed Rides</button>
+    
   </div>
 </div>
 
@@ -37,16 +53,6 @@ include_once "header.php";
   </div>
 </div>
 
-<div class="card" style="width: 18rem;">
-
-  <div class="card-body">
-    <h5 class="card-title">Total Expenses</h5>
-    <h2 style="color: brown; text-align:center; padding:20px;" id="TotalExpenses"></h2>
-    
-  </div>
-</div>
-
-
 
 
 </div>
@@ -54,22 +60,10 @@ include_once "header.php";
 <div class="container">
 
 
-<!---------------------------Get Pending Rides Table--------------------------------------------------------->
+<!----------------------------Get Pending Rides Table--------------------------------------------------------->
 
 <table class="table table-success table-striped" id="GetPendingTable">
 <thead>
-    <tr>
-      <th scope="col">Ride_Id</th>
-      <th scope="col">Ride_Date</th>
-      <th scope="col">From</th>
-      <th scope="col">To</th>
-      <th scope="col">Cab_Type</th>
-      <th scope="col">Total_Distance</th>
-      <th scope="col">luggage</th>
-      <th scope="col">Total_Fare</th>
-      <th scope="col">Status</th>
-      <th scope="col">Action</th>
-    </tr>
   </thead>
   <tbody>
   </tbody>
@@ -80,37 +74,26 @@ include_once "header.php";
 
 <table class="table table-success table-striped" id="GetAllRidesTable">
 <thead>
-    <tr>
-      <th scope="col">Ride_Id</th>
-      <th scope="col">Ride_Date</th>
-      <th scope="col">From</th>
-      <th scope="col">To</th>
-      <th scope="col">Cab_Type</th>
-      <th scope="col">Total_Distance</th>
-      <th scope="col">luggage</th>
-      <th scope="col">Total_Fare</th>
-      <th scope="col">Status</th>
-    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<!----------------------------------Get Cancelled Rides Table-------------------------------------------- -->
+
+<table class="table table-success table-striped" id="GetCancelledRidesTable">
+<thead>
   </thead>
   <tbody>
   </tbody>
 </table>
 
+</div>
+
+
 <!-----------------------Get Completed Rides Table-------------->
 
 <table class="table table-success table-striped" id="GetCompletedRidesTable">
 <thead>
-    <tr>
-      <th scope="col">Ride_Id</th>
-      <th scope="col">Ride_Date</th>
-      <th scope="col">From</th>
-      <th scope="col">To</th>
-      <th scope="col">Cab_Type</th>
-      <th scope="col">Total_Distance</th>
-      <th scope="col">luggage</th>
-      <th scope="col">Total_Fare</th>
-      <th scope="col">Status</th>
-    </tr>
   </thead>
   <tbody>
   </tbody>
@@ -142,7 +125,7 @@ include_once "header.php";
 
 <?php
 
-include_once "footer.php";
+include_once "assets/template/footer.php";
 
 //Here we are checking wheather the session of ride is set or not
 
@@ -231,6 +214,11 @@ GetPendingRides();
 GetAllRides();
 $('#GetAllRidesTable').hide();
 
+// ----------------------------------------------------------------------------------------------------------
+
+GetCanelledRides();
+$('#GetCancelledRidesTable').hide();
+
 //--------------------------------------------------------------------------------------------------------------
 
 GetCompletedRides();
@@ -245,7 +233,7 @@ $('#GetCompletedRides').on('click',function(){
   $('#GetCompletedRidesTable').show();
   $('#GetAllRidesTable').hide();
   $('#GetPendingTable').hide();
-
+  $('#GetCancelledRidesTable').hide();
 
 });
 
@@ -265,9 +253,50 @@ $.ajax({
 
     var data = JSON.parse(res);
     $('#TotalCompletedRides').html(data.length);
+
+    $('#GetCompletedRidesTable thead').append(' <tr><th scope="col">Ride_Id</th><th scope="col">Ride_Date</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Cab_Type</th><th scope="col">Total_Distance</th><th scope="col">luggage</th><th scope="col">Total_Fare</th><th scope="col">Status</th></tr>');
     
     for(var i = 0; i<data.length;i++){
-      $('#GetCompletedRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td>'+data[i]['status']+'</td></tr>');
+      $('#GetCompletedRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><a class="btn btn-success">Completed</a></td></tr>');
+
+    }
+    
+  }
+})
+}
+
+//-------------------------------Get Cancelled Rides Of a particular user--------------------------------------
+
+$('#GetCancelledRides').on('click',function(){
+
+$('#GetCancelledRidesTable').show();
+$('#GetCompletedRidesTable').hide();
+$('#GetAllRidesTable').hide();
+$('#GetPendingTable').hide();
+
+
+});
+
+
+function GetCanelledRides(){
+
+var user_id = <?php echo $_SESSION['user']['user_id'];?>;
+$.ajax({
+  url:'../Helper.php',
+  type:'POST',
+  data:{
+    'user_id':user_id,
+    'action':'GetCancelledRides',
+  },
+  success:function(res){
+
+    var data = JSON.parse(res);
+    $('#TotalCancelledRides').html(data.length);
+
+    $('#GetCancelledRidesTable thead').append(' <tr><th scope="col">Ride_Id</th><th scope="col">Ride_Date</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Cab_Type</th><th scope="col">Total_Distance</th><th scope="col">luggage</th><th scope="col">Total_Fare</th></tr>');
+    
+    for(var i = 0; i<data.length;i++){
+      $('#GetCancelledRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']);
 
     }
     
@@ -284,6 +313,7 @@ $('#GetPendingRides').on('click',function(){
   $('#GetCompletedRidesTable').hide();
   $('#GetAllRidesTable').hide();
   $('#GetPendingTable').show();
+  $('#GetCancelledRidesTable').hide();
 
 });
 
@@ -300,6 +330,7 @@ $.ajax({
     success:function(res){
       var data = JSON.parse(res);
       $('#TotalPendingRides').html(data.length);
+      $('#GetPendingTable thead').append('<tr><th scope="col">Ride_Id</th><th scope="col">Ride_Date</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Cab_Type</th><th scope="col">Total_Distance</th><th scope="col">luggage</th><th scope="col">Total_Fare</th><th scope="col">Status</th><th scope="col">Action</th></tr>');
      
       for(var i = 0; i<data.length;i++){
         $('#GetPendingTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td>'+data[i]['status']+'</td><td><button class="btn btn-danger" onclick="CancelRide('+data[i]["ride_id"]+')">Cancel</a></td></tr>');
@@ -317,6 +348,7 @@ $('#GetAllRides').on('click',function(){
 $('#GetCompletedRidesTable').hide();
 $('#GetAllRidesTable').show();
 $('#GetPendingTable').hide();
+$('#GetCancelledRidesTable').hide();
 
 });
 
@@ -337,11 +369,23 @@ function GetAllRides(){
 
       $('#TotalRides').html(data.length);
 
+      $('#GetAllRidesTable thead').append('<tr><th scope="col">Ride_Id</th><th scope="col">Ride_Date</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Cab_Type</th><th scope="col">Total_Distance</th><th scope="col">luggage</th><th scope="col">Total_Fare</th><th scope="col">Status</th></tr>');
       
 
       for(var i = 0; i<data.length;i++){
-        $('#GetAllRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td>'+data[i]['status']+'</td></tr>');
+        if(data[i]['status']==1){
 
+          $('#GetAllRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><a class="btn btn-danger">Pending</a></td></tr>');
+
+        }else if(data[i]['status']==2){
+
+          $('#GetAllRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><a class="btn btn-success">Completed</a></td></tr>');
+
+
+        }else{
+        $('#GetAllRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><a class="btn btn-primary">Cancelled</a></td></tr>');
+
+        }
       }
 
     }
@@ -417,7 +461,7 @@ function GetUserImage() {
     success:function(res) {
       var data = JSON.parse(res);
       console.log(data);
-      $('#userImg').attr("src","../uploads/"+data['img']+"");
+      $('#userImg').attr("src","../assets/uploads/"+data['img']+"");
 
       $('#userImg').attr("alt","/uploads/"+data['img']+"");
 

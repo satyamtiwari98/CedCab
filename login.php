@@ -9,7 +9,7 @@ if(isset($_SESSION['user']['email_id'])) {
 
 }else {
 
-  include "template/header.php";
+  include "assets/template/header.php";
 
 ?>
 
@@ -59,7 +59,7 @@ if(isset($_SESSION['user']['email_id'])) {
 </div>
 
 
-<?php include "template/footer.php"; ?>
+<?php include "assets/template/footer.php"; ?>
 
 <script>
 

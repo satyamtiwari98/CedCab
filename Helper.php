@@ -49,7 +49,7 @@ if(isset($_POST['action'])){
 //---------------------------------------SingnUp or User Registeration-----------------------------------------
 
         case 'SignUp':
-            $target_dir = "uploads/";
+            $target_dir = "assets/uploads/";
             $targetfile = $_FILES['file']['name'];
             $target_file = $target_dir . basename($targetfile);
             $uploadOk = 1;
@@ -177,6 +177,7 @@ if(isset($_POST['action'])){
 
 
             $user = $_POST['user'];
+            // die($user);
             $userObject = new User();
             $user_id = $userObject->GetID($user);
 
@@ -217,6 +218,18 @@ if(isset($_POST['action'])){
 
             $rideObject = new Ride();
             $result = $rideObject->GetCompletedRides($user_id);
+
+            echo json_encode($result);
+
+            break;
+
+// ---------------------Get all Cancelled Rides Details--------------------------------------------------------
+
+        case 'GetCancelledRides':
+            $user_id = $_POST['user_id'];
+
+            $rideObject = new Ride();
+            $result = $rideObject->GetCancelledRides($user_id);
 
             echo json_encode($result);
 
