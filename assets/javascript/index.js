@@ -9,7 +9,7 @@ function luggageNotAllowed() {
     if(a == 'CedMicro') {
     
         luggage.disabled = true;
-        luggage.value = "notAllowed";
+        luggage.value = "0";
         luggage.placeholder = "Luggage Facility is not allowed for Ced Micro";
 
     }else {

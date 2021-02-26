@@ -1,10 +1,21 @@
 <?php 
-    
-    include_once "assets/template/header.php";
-    include_once "array.php";
+ 
+session_start();
 
+// ------------------------------------------Session Check-----------------------------------------------
+
+if(isset($_SESSION['user']['email_id'])) {
+
+  die("You are already Logged In!!!");
+
+}
+include_once "assets/template/header.php";
+include_once "array.php";
+
+  
 
 ?>
+
 
 <div class="main">
 
@@ -85,4 +96,9 @@
 
 
 
-<?php include "assets/template/footer.php"; ?>
+<?php include "assets/template/footer.php"; 
+
+  
+  ?>
+
+  

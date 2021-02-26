@@ -1,4 +1,18 @@
-<?php  include "assets/template/header.php"; ?>
+<?php  
+
+    session_start();
+
+// ------------------------------------------Session Check-----------------------------------------------
+
+if(isset($_SESSION['user']['email_id'])) {
+
+  die("You are already Logged In !!!!");
+
+}
+
+include "assets/template/header.php"; 
+    
+?>
 
 <div class="register">
 

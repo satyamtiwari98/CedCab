@@ -123,6 +123,8 @@ $.ajax({
 
 $(document).ready(function () {
 
+    GetUserImage();
+
 letsGetOptions(); // This is function invoking on document load
 
 // -------------------------------This is to activate the modal to display the booked ride details-------------------------------
@@ -231,7 +233,7 @@ var luggage = document.getElementById('luggage');
 if(a == 'CedMicro') {
 
     luggage.disabled = true;
-    luggage.value = "notAllowed";
+    luggage.value = "0";
     luggage.placeholder = "Luggage Facility is not allowed for Ced Micro";
 
 }else {
@@ -265,6 +267,32 @@ $("#pickUp option").show();
 $(`#pickUp option[value=${$(this).val()}]`).hide();
 
 });
+
+
+function GetUserImage() {
+
+var user_id = <?php echo $_SESSION['user']['user_id'];?>;
+
+$.ajax({
+  url:'../Helper.php',
+  type:'POST',
+  data:{
+    'user_id':user_id,
+    'action':'GetUserImage',
+  },
+  success:function(res) {
+    var data = JSON.parse(res);
+    console.log(data);
+    $('#userImg').attr("src","../assets/uploads/"+data['img']+"");
+
+    $('#userImg').attr("alt","/uploads/"+data['img']+"");
+
+
+  }
+})
+
+
+}
 
 
 

@@ -41,12 +41,14 @@ class Ride extends Dbcon {
         $this->cabType = $cabType;
         $this->luggage = $luggage;
         $this->totalDistance = $totalDistance;
+        $time = time();
 
         $_SESSION['ride']['pickup']=$this->distance1;
         $_SESSION['ride']['drop']=$this->distance2;
         $_SESSION['ride']['cabtype']=$this->cabType;
         $_SESSION['ride']['luggage']=$this->luggage;
         $_SESSION['ride']['totaldistance']=$this->totalDistance;
+        $_SESSION['ride']['bookedTime'] = $time;
       
 
         switch($this->cabType){
@@ -601,6 +603,29 @@ class Ride extends Dbcon {
             return 0;
 
         }
+
+    }
+
+
+    public function GetInfo($ride_id){
+
+        $this->ride_id = $ride_id;
+        $sqlQuery = "Select * from `".self::table_ride."` where `ride_id`='$this->ride_id'";
+
+        $result = $this->connect->query($sqlQuery);
+
+        if($result->num_rows>0) {
+            $i=0;
+            while($row = $result->fetch_assoc()) {
+                $this->data[$i] = $row;
+                ++$i;
+              }
+            
+        }
+
+        return $this->data;
+
+
 
     }
 

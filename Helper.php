@@ -177,7 +177,7 @@ if(isset($_POST['action'])){
 
 
             $user = $_POST['user'];
-            // die($user);
+            
             $userObject = new User();
             $user_id = $userObject->GetID($user);
 
@@ -264,6 +264,15 @@ if(isset($_POST['action'])){
 
             $userObject = new User();
             $result = $userObject->GetUserImage($user_id);
+
+            echo json_encode($result);
+            break;
+
+        case 'GetInfo':
+            $ride_id = $_POST['ride_id'];
+
+            $rideObject = new Ride();
+            $result = $rideObject->GetInfo($ride_id);
 
             echo json_encode($result);
             break;

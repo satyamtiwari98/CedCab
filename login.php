@@ -5,9 +5,9 @@ session_start();
 
 if(isset($_SESSION['user']['email_id'])) {
 
-  die("You are not allowed");
+  die("You are already Logged In !!!!");
 
-}else {
+}
 
   include "assets/template/header.php";
 
@@ -122,4 +122,4 @@ $(document).ready(function() {
 </script>
 
 
-<?php } ?>
+<?php  ?>
