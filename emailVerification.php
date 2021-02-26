@@ -18,7 +18,7 @@ $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth = true;
 $mail->Username = "satyamtiwari1598@gmail.com";
-$mail->Password = "satyam@tiwari.98";
+$mail->Password = "yourPassword";
 $mail->Port = 465;
 $mail->SMTPSecure = "ssl";
 $otpForVerification = rand(1001,9999);
