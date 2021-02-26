@@ -1,7 +1,9 @@
 <?php
 
 include_once 'Dbcon.php';
-// session_start();
+
+// ------------------------------Ride class----------------------------------------------------------------
+
 
 class Ride extends Dbcon {
 
@@ -31,7 +33,9 @@ class Ride extends Dbcon {
     }
 
 
-    public function CalculateFare($cabType,$luggage,$pickupPoint,$dropPoint,$totalDistance,$distance1,$distance2){
+// -------------------------------Fare Calculation-----------------------------------------------------------
+
+    public function CalculateFare($cabType,$luggage,$pickupPoint,$dropPoint,$totalDistance,$distance1,$distance2) {
 
         $this->distance1 = $distance1;
         $this->distance2 = $distance2;
@@ -51,7 +55,7 @@ class Ride extends Dbcon {
         $_SESSION['ride']['bookedTime'] = $time;
       
 
-        switch($this->cabType){
+        switch($this->cabType) {
 
             case 'CedMini':
                $miniFixed=150;
@@ -451,7 +455,11 @@ class Ride extends Dbcon {
 
     }
 
-    public function BookRide($pickup,$drop,$cab,$luggage,$fare,$total,$id){
+
+    // -----------------------------Book Ride Function---------------------------------------------------------
+
+
+    public function BookRide($pickup,$drop,$cab,$luggage,$fare,$total,$id) {
 
         $this->pickupPoint = $pickup;
         $this->dropPoint = $drop;
@@ -487,18 +495,25 @@ class Ride extends Dbcon {
 
     }
 
-    public function GetPendingRides($user_id){
+    // ----------------------------------Get Pending Rides-----------------------------------------------------
+
+    public function GetPendingRides($user_id) {
 
         $this->user_id = $user_id;
+
         $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='1'";
 
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {
+
             $i=0;
+
             while($row = $result->fetch_assoc()) {
+
                 $this->data[$i] = $row;
                 ++$i;
+
               }
             
         }
@@ -508,6 +523,8 @@ class Ride extends Dbcon {
 
     }
 
+
+// -------------------------------------Get all Rides----------------------------------------------------------
 
     public function GetAllRides($user_id){
 
@@ -517,10 +534,14 @@ class Ride extends Dbcon {
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {
+
             $i=0;
+
             while($row = $result->fetch_assoc()) {
+
                 $this->data[$i] = $row;
                 ++$i;
+
               }
             
         }
@@ -529,18 +550,26 @@ class Ride extends Dbcon {
 
     }
 
-    public function GetCompletedRides($user_id){
+// ----------------------------Get Completed Rides-------------------------------------------------------------
+
+
+    public function GetCompletedRides($user_id) {
 
         $this->user_id = $user_id;
 
         $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='2'";
+
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {
+
             $i=0;
+
             while($row = $result->fetch_assoc()) {
+
                 $this->data[$i] = $row;
                 ++$i;
+
               }
             
         }
@@ -548,19 +577,27 @@ class Ride extends Dbcon {
         return $this->data;
 
     }
+
+// -------------------------------Get Cancelled Rides----------------------------------------------------------
+
 
     public function GetCancelledRides($user_id){
 
         $this->user_id = $user_id;
 
         $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='0'";
+
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {
+
             $i=0;
+
             while($row = $result->fetch_assoc()) {
+
                 $this->data[$i] = $row;
                 ++$i;
+
               }
             
         }
@@ -569,28 +606,37 @@ class Ride extends Dbcon {
 
     }
 
-    public function GetTotalExpenses($user_id){
+// ------------------------------------Get Total Expenses------------------------------------------------------
+
+
+    public function GetTotalExpenses($user_id) {
+
         $this->user_id = $user_id;
 
         $sqlQuery = "select sum(`total_fare`) from `".self::table_ride."` where `customer_user_id` = '$this->user_id' and `status`='2'";
-// die($sqlQuery);
+
         $result = $this->connect->query($sqlQuery);
-        if($result->num_rows>0){
+
+        if($result->num_rows>0) {
+
             $row = $result->fetch_assoc();
+
         }
         
-        // die($result[0]);
 
         return $row;
 
     }
+
+// --------------------------------Cancel Rides---------------------------------------------------------------
+
 
     public function CancelRide($ride_id) {
 
         $this->ride_id = $ride_id;
 
         $sqlQuery = "update `".self::table_ride."` set `status`='0' where `ride_id`='$this->ride_id' and `status`='1'";
-// die($sqlQuery);
+
         $result = $this->connect->query($sqlQuery);
 
 
@@ -605,6 +651,8 @@ class Ride extends Dbcon {
         }
 
     }
+
+// -----------------------------Get users ride information-----------------------------------------------------
 
 
     public function GetInfo($ride_id){

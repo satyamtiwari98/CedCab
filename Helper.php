@@ -6,7 +6,7 @@
     include_once "Class/Ride.php";
     
 
-if(isset($_POST['action'])){
+if(isset($_POST['action'])) {
 
     $action = $_POST['action'];
 
@@ -259,6 +259,8 @@ if(isset($_POST['action'])){
 
             break;
 
+// --------------------------------------Get User Image on User Dashboard-------------------------------------
+
         case 'GetUserImage':
             $user_id = $_POST['user_id'];
 
@@ -267,6 +269,8 @@ if(isset($_POST['action'])){
 
             echo json_encode($result);
             break;
+
+// ------------------------------------Get User Ride Info-----------------------------------------------------
 
         case 'GetInfo':
             $ride_id = $_POST['ride_id'];

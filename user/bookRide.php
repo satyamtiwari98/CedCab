@@ -97,7 +97,8 @@
 
 //---------------------------------------This is to get the options in the dropdown-----------------------
 
-function letsGetOptions(){
+function letsGetOptions() {
+
 var select1 = $('#pickUp');
 var select2 = $('#drop');
 
@@ -111,21 +112,28 @@ $.ajax({
     
         var location = JSON.parse(res);
 
-        for(var i =0;i<location.length;i++){
+        for(var i =0;i<location.length;i++) {
+
             let option = "<option value="+location[i]['distance']+">"+location[i]['name']+"</option>";
             select1.append(option);
             select2.append(option);
+
         }
+
     }
+
 });
+
 }
 
 
 $(document).ready(function () {
 
-    GetUserImage();
+  GetUserImage();
 
-letsGetOptions(); // This is function invoking on document load
+  letsGetOptions(); // This is function invoking on document load
+
+
 
 // -------------------------------This is to activate the modal to display the booked ride details-------------------------------
 
@@ -140,7 +148,7 @@ $("#subId").click(function (e) {
   var weight = $('#luggage').val();
 
  
-  if(distance1 != '' && distance2 != '' && cabtype != '' && weight != '' ){
+  if(distance1 != '' && distance2 != '' && cabtype != '' && weight != '' ) {
 
   $.ajax({
 
@@ -162,8 +170,7 @@ $("#subId").click(function (e) {
         $('#my').modal('show');
 
 
-
-        $('#BookRide').on('click',function(){
+        $('#BookRide').on('click',function() {
 
 
             $.ajax({
@@ -179,45 +186,49 @@ $("#subId").click(function (e) {
                     'user':"<?php echo $_SESSION['user']['email_id']; ?>",
                     'action':'BookRide',
                 },
-                success:function(res){
+                success:function(res) {
+
             console.log(res);
-                    if(res==1){
+
+                    if(res==1) {
+
                         alert("Ride Booked SuccessFully!!!!");
                         $('#my').modal('hide');
                         // location.reload();
                         $(window).attr("location","index.php");
+
             
-                    }else{
+                    }else {
+
                         alert("Sorry You cannot book This ride!!!");
                         $('#my').modal('hide');
                         location.reload();
+
                     }
             
                 }
+
             });
+
             
             });
-
-
-
 
 
           }
           
        
       }
+
   );
+
     } else {
 
         alert("Please provide valid details!!!!");
         
     }
 
+
 });
-
-
-
-
 
 });
 
@@ -281,15 +292,18 @@ $.ajax({
     'action':'GetUserImage',
   },
   success:function(res) {
+
     var data = JSON.parse(res);
     console.log(data);
+
     $('#userImg').attr("src","../assets/uploads/"+data['img']+"");
 
     $('#userImg').attr("alt","/uploads/"+data['img']+"");
 
 
   }
-})
+
+});
 
 
 }

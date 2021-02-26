@@ -3,10 +3,12 @@ session_start();
 if(isset($_SESSION['user']['email_id'])) {
 
     session_destroy();
-header("location:../index.php");
+    header("location:../index.php");
 
 
-}else{
+}else {
+
     echo "Logout will not work";
+    
 }
 
