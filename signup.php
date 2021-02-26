@@ -84,7 +84,7 @@ $(document).ready(function() {
     formdata.append('file',$('input[type=file]')[0].files[0]);
     formdata.append('action','SignUp');
 
-  if(name != ''&& email != '' && mobile != '' && password != '') {
+  if(name != '' && email != '' && mobile != '' && password != '') {
 
     $.ajax({
             url:'emailVerification.php',

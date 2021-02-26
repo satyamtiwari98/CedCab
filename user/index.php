@@ -200,7 +200,7 @@ $(document).ready(function(){
    
 });
 
-//------------------------------------------Book Ride Function------------------------------------------------------
+//-------------------------------------Book Ride Function------------------------------------------------------
 
 $('#BookRide').on('click',function(){
 
@@ -418,7 +418,7 @@ $.ajax({
 
 
 
-//--------------------------------Get all the pending Rides of a Particular user-------------------------------------
+//--------------------------Get all the pending Rides of a Particular user-------------------------------------
 
 $('#GetPendingRides').on('click',function(){
 
@@ -458,7 +458,7 @@ $.ajax({
 });
 }
 
-//-----------------------------------Get all The Details of Rides of a Particular user--------------------------
+//----------------------------------Get all The Details of Rides of a Particular user--------------------------
 
 $('#GetAllRides').on('click',function() {
 
@@ -576,6 +576,7 @@ function CancelRide(ride_id) {
 }
 
 
+// ------------------------------------Get User Image function-------------------------------------------------
 
 function GetUserImage() {
 

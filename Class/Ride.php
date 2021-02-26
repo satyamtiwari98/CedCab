@@ -547,6 +547,38 @@ class Ride extends Dbcon {
 
     }
 
+    public function GetPendingRidesAdmin() {
+
+        try{
+
+        $sqlQuery = "Select * from `".self::table_ride."` where  `status`='1'";
+
+        $result = $this->connect->query($sqlQuery);
+
+        if($result->num_rows>0) {
+
+            $i=0;
+
+            while($row = $result->fetch_assoc()) {
+
+                $this->data[$i] = $row;
+                ++$i;
+
+              }
+            
+        }
+
+        return $this->data;
+
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
+
+    }
+
 
 // -------------------------------------Get all Rides----------------------------------------------------------
 
@@ -557,6 +589,39 @@ class Ride extends Dbcon {
         $this->user_id = $user_id;
 
         $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id'";
+        $result = $this->connect->query($sqlQuery);
+
+        if($result->num_rows>0) {
+
+            $i=0;
+
+            while($row = $result->fetch_assoc()) {
+
+                $this->data[$i] = $row;
+                ++$i;
+
+              }
+            
+        }
+
+        return $this->data;
+
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
+    }
+
+
+
+    public function GetAllRidesAdmin() {
+
+        try {
+
+
+        $sqlQuery = "Select * from `".self::table_ride."`";
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {
@@ -628,6 +693,40 @@ class Ride extends Dbcon {
         $this->user_id = $user_id;
 
         $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='0'";
+
+        $result = $this->connect->query($sqlQuery);
+
+        if($result->num_rows>0) {
+
+            $i=0;
+
+            while($row = $result->fetch_assoc()) {
+
+                $this->data[$i] = $row;
+                ++$i;
+
+              }
+            
+        }
+
+        return $this->data;
+
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
+    }
+
+
+
+    public function GetCancelledRidesAdmin() {
+
+        try {
+
+
+        $sqlQuery = "Select * from `".self::table_ride."` where `status`='0'";
 
         $result = $this->connect->query($sqlQuery);
 

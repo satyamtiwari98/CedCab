@@ -260,6 +260,15 @@ if(isset($_POST['action'])) {
 
             break;
 
+        case 'GetPendingRidesAdmin':
+    
+                $rideObject = new Ride();
+                $result = $rideObject->GetPendingRidesAdmin();
+    
+                echo json_encode($result);
+    
+                break;
+
 // ------------------------------------Get All Rides details---------------------------------------------------
 
         case 'GetAllRides':
@@ -271,6 +280,15 @@ if(isset($_POST['action'])) {
             echo json_encode($result);
 
             break;
+
+        case 'GetAllRidesAdmin':
+    
+                $rideObject = new Ride();
+                $result = $rideObject->GetAllRidesAdmin();
+    
+                echo json_encode($result);
+    
+                break;
 
 // -------------------------Get all completed rides details--------------------------------------------------
 
@@ -295,6 +313,18 @@ if(isset($_POST['action'])) {
             echo json_encode($result);
 
             break;
+
+
+        case 'GetCancelledRidesAdmin':
+    
+                $rideObject = new Ride();
+                $result = $rideObject->GetCancelledRidesAdmin();
+    
+                echo json_encode($result);
+    
+                break;
+
+
 
         case 'ChangePassword':
             $currentPassword = $_POST['currentPassword'];
