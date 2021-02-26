@@ -272,6 +272,8 @@ class User extends Dbcon {
     }
 
 
+// --------------------------------Edit Profile --------------------------------------------------------------
+
     public function editProfile($name,$file,$email){
 
         try {

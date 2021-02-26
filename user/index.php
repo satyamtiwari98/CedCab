@@ -145,7 +145,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-success" id="BookRide">Book Ride</button> -->
+      
       </div>
     </div>
   </div>
@@ -165,7 +165,7 @@ $current_time = time();
 if(isset($_SESSION['ride']['bookedTime']) && isset($_SESSION['ride']['pickup'])){
 
   if(((time() - $_SESSION['ride']['bookedTime']) > $login_session_duration)){ 
-    // return true;
+    
     echo "Session Expired";
     unset($_SESSION['ride']['pickup']);
     unset($_SESSION['ride']['drop']);
@@ -331,7 +331,6 @@ $.ajax({
 
 function getInfo(ride_id) {
 
-  console.log(ride_id);
   var id = ride_id;
 
   $.ajax({
@@ -341,9 +340,9 @@ function getInfo(ride_id) {
       'ride_id':id,
       'action':'GetInfo',
     },
-    success:function(res){
+    success:function(res) {
+
       var data = JSON.parse(res);
-      console.log(data[0]);
 
       if(data[0]['status']==2) {
 
@@ -389,6 +388,7 @@ $('#GetPendingTable').hide();
 function GetCanelledRides(){
 
 var user_id = <?php echo $_SESSION['user']['user_id'];?>;
+
 $.ajax({
   url:'../Helper.php',
   type:'POST',
@@ -592,11 +592,7 @@ function GetUserImage() {
 
       var data = JSON.parse(res);
 
-      console.log(data);
-
       $('#userImg').attr("src","../assets/uploads/"+data['img']+"");
-
-      $('#userImg').attr("alt","/uploads/"+data['img']+"");
 
 
     }

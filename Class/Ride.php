@@ -750,8 +750,4 @@ class Ride extends Dbcon {
     }
 
 
-
-
-
-
 }
