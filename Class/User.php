@@ -147,7 +147,9 @@ class User extends Dbcon {
 
 // -----------------------------------This function is used to get the users id using its email id------------
 
-    public function GetID($user){
+    public function GetID($user) {
+
+        try {
 
         $this->email_id = $user;
 
@@ -161,6 +163,12 @@ class User extends Dbcon {
         }else{
             return "Not Found!!!";
         }
+
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
         
     }
 
@@ -203,8 +211,11 @@ class User extends Dbcon {
     
     }
 
+// -----------------------------Get User Image Function------------------------------------------------------
 
     public function GetUserImage($user_id){
+
+        try {
 
         $this->user_id = $user_id;
 
@@ -220,11 +231,76 @@ class User extends Dbcon {
             return "Not Found!!!";
         }
 
+    } catch(Exception $e) {
+
+        return $e;
 
     }
 
 
+    }
 
+// ---------------------------------------Change Password Function---------------------------------------------
+
+    public function ChangePassword($currentPassword,$password,$email_id){
+
+        try {
+
+        $currentPassword = $currentPassword;
+        $this->password = $password;
+        $this->email_id = $email_id;
+
+        $sqlQuery = "update `".self::table_user."` set `password`='$this->password' where `password`='$currentPassword' and `email_id`='$this->email_id'";
+
+        $result = $this->connect->query($sqlQuery);
+
+        if ($result == True) {
+            
+            return 1;
+
+          } else {
+            
+            return 0;
+          }
+
+        } catch(Exception $e) {
+
+            return $e;
+    
+        }
+
+    }
+
+
+    public function editProfile($name,$file,$email){
+
+        try {
+
+        $this->name = $name;
+        $this->file = $file;
+        $this->email_id = $email;
+
+        $sqlQuery = "update `".self::table_user."` set `name`='$this->name',`img`='$this->file' where `email_id`='$this->email_id'";
+        
+
+        if ($this->connect->query($sqlQuery) == TRUE) {
+            
+            return 1;
+
+          } else {
+
+        
+            return 0;
+
+          }
+
+        } catch(Exception $e) {
+
+            return $e;
+    
+        }
+
+    }
 
 
 

@@ -13,8 +13,6 @@ if(isset($_SESSION['user']['email_id'])) {
 include_once "assets/template/header.php";
 include_once "array.php";
 
-  
-
 ?>
 
 
@@ -29,28 +27,52 @@ include_once "array.php";
 
 
 <div class="formSection">
+
     <h2 id="formSectionH2">City Taxi</h2>
+
     <hr>
+
     <h5>Your everyday travel partner</h5>
+
     <p>AC Cabs for point to point travel</p>
 
 
     <form action="" method="post" id="myform">
+
     <div class="input-group mb-3 mySelect">
+
   <label class="input-group-text" for="pickUp">PickUP</label>
+
   <select name="Pickup" class="form-select pick" id="pickUp" required>
+
     <option selected>PickUP Location</option>
+
   </select>
+
 </div>
+
+
+
 <div class="input-group mb-3 mySelect">
+
   <label class="input-group-text" for="drop">Drop</label>
+
   <select name="Drop" class="form-select drop" id="drop" required >
+
     <option selected>Drop Location</option>
+
   </select>
+
 </div>
+
+
+
 <div class="input-group mb-3 mySelect">
+
   <label class="input-group-text" for="cabType">CAB Type</label>
+
   <select name="cabType" class="form-select" id="cabType" onchange="luggageNotAllowed();" required>
+
     <option selected>Select CAB Type</option>
     <?php
     $length = count($cabType);
@@ -58,19 +80,30 @@ include_once "array.php";
         echo "<option value=".$cabType[$i].">$cabType[$i]</option>";
     }
     ?>
+
   </select>
+
 </div>
+
+
 <div class="input-group mb-3 mySelect">
+
   <label class="input-group-text" for="luggage">Luggages</label>
+
   <input type="text" class="form-control" placeholder="Enter Luggage in KG" name="weight" id="luggage">
 </div>
+
 <div class="input-group mb-3 mySelect">
     
 <input type="submit" class="btn btn-success myBtn" value="Calculate Fare" name="submit" id="subId" >
-</div>
-    </form>
 
 </div>
+
+    </form>
+
+
+</div>
+
 
 </div>
 
@@ -97,9 +130,10 @@ include_once "array.php";
 
 
 
-<?php include "assets/template/footer.php"; 
+<?php 
 
-  
-  ?>
+  include "assets/template/footer.php"; 
+
+?>
 
   

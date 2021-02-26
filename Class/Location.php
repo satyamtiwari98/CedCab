@@ -23,6 +23,8 @@ class Location extends Dbcon{
 // ------------------------------Get Option in the dropdown from the database---------------------------------
 
     public function GetOptions() {
+
+        try {
        
         $sqlQuery = "Select * from `".self::table_location."`";
 
@@ -43,6 +45,12 @@ class Location extends Dbcon{
 
         return $this->arr;
 
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
     }
 
 
@@ -50,6 +58,8 @@ class Location extends Dbcon{
 
 
     public function GetDistanceName($distance) {
+
+        try {
 
         $this->distance = $distance;
 
@@ -64,9 +74,14 @@ class Location extends Dbcon{
         }else {
 
             return "Not Found!!!";
-            
+
         }
 
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
 
 
     }

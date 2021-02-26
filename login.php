@@ -121,7 +121,5 @@ $(document).ready(function() {
   });
 
 });
+
 </script>
-
-
-<?php  ?>

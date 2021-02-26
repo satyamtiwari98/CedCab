@@ -26,33 +26,51 @@ if(isset($_SESSION['user']) && $_SESSION['user']['is_admin']==0) {
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
   <div class="container-fluid">
+
     <a class="navbar-brand" href="index.php">CEDCAB</a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
       <span class="navbar-toggler-icon"></span>
+
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNav">
+
       <ul class="navbar-nav">
+
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="aboutus.php">AboutUS</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="contactus.php">ContactUS</a>
+          <a class="nav-link" href="edit.php">EditYourProfile</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="bookRide.php">Book Ride</a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="password.php">Change Password</a>
+        </li>
+
         <li class="nav-item">
           <a class="nav-link" href="logout.php">LogOut</a>
         </li>
         
       </ul>
     </div>
- <?php echo "Hello ".$_SESSION['user']['email_id'];  ?>
+
+ <?php echo "Hello  <b style='color:brown;'> ".$_SESSION['user']['name']."</b>";  ?>
  <img src="" id="userImg" alt="This is image" height="20px" width="40px"/>
+ 
   </div>
 </nav>
 

@@ -37,6 +37,8 @@ class Ride extends Dbcon {
 
     public function CalculateFare($cabType,$luggage,$pickupPoint,$dropPoint,$totalDistance,$distance1,$distance2) {
 
+        try {
+
         $this->distance1 = $distance1;
         $this->distance2 = $distance2;
 
@@ -449,6 +451,12 @@ class Ride extends Dbcon {
     
             }
 
+        } catch(Exception $e) {
+
+            return $e;
+    
+        }
+
 
        
 
@@ -460,6 +468,8 @@ class Ride extends Dbcon {
 
 
     public function BookRide($pickup,$drop,$cab,$luggage,$fare,$total,$id) {
+
+        try {
 
         $this->pickupPoint = $pickup;
         $this->dropPoint = $drop;
@@ -493,11 +503,19 @@ class Ride extends Dbcon {
 
           }
 
+        } catch(Exception $e) {
+
+            return $e;
+    
+        }
+
     }
 
     // ----------------------------------Get Pending Rides-----------------------------------------------------
 
     public function GetPendingRides($user_id) {
+
+        try{
 
         $this->user_id = $user_id;
 
@@ -520,13 +538,21 @@ class Ride extends Dbcon {
 
         return $this->data;
 
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
 
     }
 
 
 // -------------------------------------Get all Rides----------------------------------------------------------
 
-    public function GetAllRides($user_id){
+    public function GetAllRides($user_id) {
+
+        try {
 
         $this->user_id = $user_id;
 
@@ -548,12 +574,20 @@ class Ride extends Dbcon {
 
         return $this->data;
 
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
     }
 
 // ----------------------------Get Completed Rides-------------------------------------------------------------
 
 
     public function GetCompletedRides($user_id) {
+
+        try {
 
         $this->user_id = $user_id;
 
@@ -576,12 +610,20 @@ class Ride extends Dbcon {
 
         return $this->data;
 
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
     }
 
 // -------------------------------Get Cancelled Rides----------------------------------------------------------
 
 
-    public function GetCancelledRides($user_id){
+    public function GetCancelledRides($user_id) {
+
+        try {
 
         $this->user_id = $user_id;
 
@@ -604,12 +646,20 @@ class Ride extends Dbcon {
 
         return $this->data;
 
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
     }
 
 // ------------------------------------Get Total Expenses------------------------------------------------------
 
 
     public function GetTotalExpenses($user_id) {
+
+        try {
 
         $this->user_id = $user_id;
 
@@ -626,12 +676,20 @@ class Ride extends Dbcon {
 
         return $row;
 
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
     }
 
 // --------------------------------Cancel Rides---------------------------------------------------------------
 
 
     public function CancelRide($ride_id) {
+
+        try {
 
         $this->ride_id = $ride_id;
 
@@ -650,12 +708,20 @@ class Ride extends Dbcon {
 
         }
 
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
     }
 
 // -----------------------------Get users ride information-----------------------------------------------------
 
 
-    public function GetInfo($ride_id){
+    public function GetInfo($ride_id) {
+
+        try {
 
         $this->ride_id = $ride_id;
         $sqlQuery = "Select * from `".self::table_ride."` where `ride_id`='$this->ride_id'";
@@ -672,6 +738,12 @@ class Ride extends Dbcon {
         }
 
         return $this->data;
+
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
 
 
 

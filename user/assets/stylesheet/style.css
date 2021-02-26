@@ -157,3 +157,16 @@ img {
     border-radius: 50%;
 
 }
+
+#editProfile {
+
+    padding: 80px;
+
+}
+
+#passwordchange {
+
+    padding: 50px;
+    width: 50%;
+
+}
