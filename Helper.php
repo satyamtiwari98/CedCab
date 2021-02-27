@@ -453,6 +453,58 @@ if(isset($_POST['action'])) {
                 echo $result;
             
                 break;
+
+        case 'AddLocation':
+            $name = $_POST['name'];
+            $distance = $_POST['distance'];
+
+            $locationObject = new Location();
+            $result = $locationObject->AddLocation($name,$distance);
+
+            echo $result;
+
+            break;
+
+        case 'GetAllLocation':
+
+            $locationObject = new Location();
+            $result = $locationObject->GetAllLocation();
+
+            echo json_encode($result);
+
+            break;
+
+        case 'GetLocationInfo':
+            $id = $_POST['id'];
+
+            $locationObject = new Location();
+            $result = $locationObject->GetLocationInfo($id);
+
+            echo json_encode($result);
+
+            break;
+
+        case 'MakeItAvailable':
+            $location_id = $_POST['location_id'];
+
+            $locationObject = new Location();
+            $result = $locationObject->MakeItAvailable($location_id);
+
+            echo $result;
+
+            break;
+
+        case 'MakeItUnAvailable':
+                $location_id = $_POST['location_id'];
+    
+                $locationObject = new Location();
+                $result = $locationObject->MakeItUnAvailable($location_id);
+    
+                echo $result;
+    
+                break;
+
+            
     
 
     

@@ -62,6 +62,8 @@
 
 
 </div>
+
+
 <div class="Dashboard">
 
 
@@ -505,7 +507,7 @@ function GetAllRidesAdmin() {
       }
 
     }
-  })
+  });
 
 
 }

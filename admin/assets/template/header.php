@@ -54,7 +54,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']['is_admin']==1) {
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="bookRide.php">Book Ride</a>
+          <a class="nav-link" href="addlocation.php">Add Location</a>
         </li>
 
         <li class="nav-item">
