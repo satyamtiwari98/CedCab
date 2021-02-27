@@ -683,6 +683,40 @@ class Ride extends Dbcon {
 
     }
 
+
+
+    public function GetCompletedRidesAdmin() {
+
+        try {
+
+        $sqlQuery = "Select * from `".self::table_ride."` where  `status`='2'";
+
+        $result = $this->connect->query($sqlQuery);
+
+        if($result->num_rows>0) {
+
+            $i=0;
+
+            while($row = $result->fetch_assoc()) {
+
+                $this->data[$i] = $row;
+                ++$i;
+
+              }
+            
+        }
+
+        return $this->data;
+
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
+    }
+
+
 // -------------------------------Get Cancelled Rides----------------------------------------------------------
 
 
@@ -783,6 +817,33 @@ class Ride extends Dbcon {
 
     }
 
+
+
+    public function GetTotalEarningAdmin() {
+
+        try {
+
+        $sqlQuery = "select sum(`total_fare`) from `".self::table_ride."` where  `status`='2'";
+
+        $result = $this->connect->query($sqlQuery);
+
+        if($result->num_rows>0) {
+
+            $row = $result->fetch_assoc();
+
+        }
+        
+
+        return $row;
+
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
+    }
+
 // --------------------------------Cancel Rides---------------------------------------------------------------
 
 
@@ -815,6 +876,36 @@ class Ride extends Dbcon {
 
     }
 
+
+    public function ApproveRide($ride_id) {
+
+        try {
+
+        $this->ride_id = $ride_id;
+
+        $sqlQuery = "update `".self::table_ride."` set `status`='2' where `ride_id`='$this->ride_id' and `status`='1'";
+
+        $result = $this->connect->query($sqlQuery);
+
+
+        if($result == true) {
+
+            return 1;
+
+        }else {
+
+            return 0;
+
+        }
+
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+
+    }
+
 // -----------------------------Get users ride information-----------------------------------------------------
 
 
@@ -823,7 +914,7 @@ class Ride extends Dbcon {
         try {
 
         $this->ride_id = $ride_id;
-        $sqlQuery = "Select * from `".self::table_ride."` where `ride_id`='$this->ride_id'";
+        $sqlQuery = "Select * from `".self::table_ride."` FULL  JOIN `tbl_user` ON customer_user_id = tbl_user.user_id  where `ride_id`='$this->ride_id'";
 
         $result = $this->connect->query($sqlQuery);
 

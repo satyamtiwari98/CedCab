@@ -302,6 +302,16 @@ if(isset($_POST['action'])) {
 
             break;
 
+
+        case 'GetCompletedRidesAdmin':
+    
+                $rideObject = new Ride();
+                $result = $rideObject->GetCompletedRidesAdmin();
+    
+                echo json_encode($result);
+    
+                break;
+
 // ---------------------Get all Cancelled Rides Details--------------------------------------------------------
 
         case 'GetCancelledRides':
@@ -351,6 +361,15 @@ if(isset($_POST['action'])) {
 
             break;
 
+        case 'GetTotalEarningAdmin':
+    
+                $rideObject = new Ride();
+                $result = $rideObject->GetTotalEarningAdmin();
+                
+                echo json_encode($result);
+    
+                break;
+
 // -----------------------------------Cancel Pending Rides-----------------------------------------------------
 
         case 'CancelRide':
@@ -362,6 +381,16 @@ if(isset($_POST['action'])) {
             echo $result;
 
             break;
+
+        case 'ApproveRide':
+                $ride_id = $_POST['ride_id'];
+    
+                $rideObject = new Ride();
+                $result = $rideObject->ApproveRide($ride_id);
+    
+                echo $result;
+    
+                break;
 
 // --------------------------------------Get User Image on User Dashboard-------------------------------------
 
@@ -384,6 +413,47 @@ if(isset($_POST['action'])) {
 
             echo json_encode($result);
             break;
+
+
+        case 'GetAllUser':
+            $userObject = new User();
+            $result = $userObject->GetAllUser();
+
+            echo json_encode($result);
+            break;
+
+
+        case 'GetUserInfo':
+                $user_id = $_POST['user_id'];
+    
+                $userObject = new User();
+                $result = $userObject->GetUserInfo($user_id);
+    
+                echo json_encode($result);
+                break;
+
+        case 'BlockUser':
+                $user_id = $_POST['user_id'];
+        
+                $userObject = new User();
+                $result = $userObject->BlockUser($user_id);
+                
+        
+                echo $result;
+        
+                break;
+
+        case 'UnBlockUser':
+                $user_id = $_POST['user_id'];
+            
+                $userObject = new User();
+                $result = $userObject->UnBlockUser($user_id);
+                    
+            
+                echo $result;
+            
+                break;
+    
 
     
 
