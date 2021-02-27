@@ -305,6 +305,8 @@ class User extends Dbcon {
     }
 
 
+// -------------------------------------Get All Users Details----------------------------
+
     public function GetAllUser(){
         try {
         $sqlQuery = "Select * from `".self::table_user."`";
@@ -330,6 +332,8 @@ class User extends Dbcon {
 
 
     }
+
+    // --------------------------------------Get User Information-----------------------
 
     public function GetUserInfo($user_id) {
 
@@ -360,6 +364,8 @@ class User extends Dbcon {
 
 
     }
+
+// --------------------------------------Block User-------------------------------------
 
 
     public function BlockUser($user_id) {
@@ -396,6 +402,8 @@ class User extends Dbcon {
 
     }
 
+
+// -----------------------------------------UnBlock User---------------------------------
 
 
     public function UnBlockUser($user_id) {

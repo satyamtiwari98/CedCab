@@ -63,6 +63,8 @@
 
 </div>
 
+<!-----------------------------------DashBoard-------------------------------------  -->
+
 
 <div class="Dashboard">
 
@@ -115,7 +117,7 @@
 </div>
 
 
-<!-----------------------Get Completed Rides Table-------------->
+<!-----------------------Get Completed Rides Table------------------------------->
 
 <table class="table table-success table-striped" id="GetCompletedRidesTable">
 <thead>
@@ -124,7 +126,7 @@
   </tbody>
 </table>
 
-</div>
+<!---------------------------------Get All User Table-------------------------------- -->
 
 
 <table class="table table-success table-striped" id="GetAllUserTable">
@@ -270,7 +272,7 @@ $.ajax({
     
     for(var i = 0; i<data.length;i++) {
 
-      $('#GetCompletedRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><a class="btn btn-success">Completed</a></td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">View</button></td></tr>');
+      $('#GetCompletedRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'km</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'/- Rs.</td><td><a class="btn btn-success">Completed</a></td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">View</button></td></tr>');
 
     }
     
@@ -302,20 +304,20 @@ function getInfo(ride_id) {
 
       if(data[0]['status']==2) {
 
-        $('.modal-body-info').html("<p>Ride Id : <b style='color:brown'>"+data[0]['ride_id']+"</b></p><p>User Name : <b style='color:brown'>"+data[0]['name']+"</b></p><p>User Id : <b style='color:brown'>"+data[0]['user_id']+"</b></p><p>Ride Date : <b style='color:brown'>"+data[0]['ride_date']+"</b></p><p>User Email : <b style='color:brown'>"+data[0]['email_id']+"</b></p><p>Date Of SignUp : <b style='color:brown'>"+data[0]['dateofsignup']+"</b></p><p>PickUp Point : <b style='color:brown'>"+data[0]['from']+"</b></p><p>Drop Point : <b style='color:brown'>"+data[0]['to']+"</b></p><p>CabType : <b style='color:brown'>"+data[0]['cab_type']+"</b></p><p>TotalDistance : <b style='color:brown'>"+data[0]['total_distance']+"km</b></p><p>Luggage weight : <b style='color:brown'>"+data[0]['luggage']+" kg</b></p><p>Total Fare : <b style='color:brown'>Rs."+data[0]['total_fare']+"</b><p>Ride Status : <b style='color:brown'>Completed</b></p>");
+        $('.modal-body-info').html("<p>Ride Id : <b style='color:brown'>"+data[0]['ride_id']+"</b></p><p>User Name : <b style='color:brown'>"+data[0]['name']+"</b></p><p>User Id : <b style='color:brown'>"+data[0]['user_id']+"</b></p><p>Ride Date : <b style='color:brown'>"+data[0]['ride_date']+"</b></p><p>User Email : <b style='color:brown'>"+data[0]['email_id']+"</b></p><p>Date Of SignUp : <b style='color:brown'>"+data[0]['dateofsignup']+"</b></p><p>PickUp Point : <b style='color:brown'>"+data[0]['from']+"</b></p><p>Drop Point : <b style='color:brown'>"+data[0]['to']+"</b></p><p>CabType : <b style='color:brown'>"+data[0]['cab_type']+"</b></p><p>TotalDistance : <b style='color:brown'>"+data[0]['total_distance']+"km</b></p><p>Luggage weight : <b style='color:brown'>"+data[0]['luggage']+" kg</b></p><p>Total Fare : <b style='color:brown'>Rs."+data[0]['total_fare']+"/- Rs.</b><p>Ride Status : <b style='color:brown'>Completed</b></p>");
             
         $('#myinfo').modal('show');
 
 
       }else if(data[0]['status']==1) {
 
-        $('.modal-body-info').html("<p>Ride Id : <b style='color:brown'>"+data[0]['ride_id']+"</b></p><p>User Name : <b style='color:brown'>"+data[0]['name']+"</b></p><p>User Id : <b style='color:brown'>"+data[0]['user_id']+"</b></p><p>Ride Date : <b style='color:brown'>"+data[0]['ride_date']+"</b></p><p>User Email : <b style='color:brown'>"+data[0]['email_id']+"</b></p><p>Date Of SignUp : <b style='color:brown'>"+data[0]['dateofsignup']+"</b></p><p>PickUp Point : <b style='color:brown'>"+data[0]['from']+"</b></p><p>Drop Point : <b style='color:brown'>"+data[0]['to']+"</b></p><p>CabType : <b style='color:brown'>"+data[0]['cab_type']+"</b></p><p>TotalDistance : <b style='color:brown'>"+data[0]['total_distance']+"km</b></p><p>Luggage weight : <b style='color:brown'>"+data[0]['luggage']+" kg</b></p><p>Total Fare : <b style='color:brown'>Rs."+data[0]['total_fare']+"</b><p>Ride Status : <b style='color:brown'>Pending</b></p>");
+        $('.modal-body-info').html("<p>Ride Id : <b style='color:brown'>"+data[0]['ride_id']+"</b></p><p>User Name : <b style='color:brown'>"+data[0]['name']+"</b></p><p>User Id : <b style='color:brown'>"+data[0]['user_id']+"</b></p><p>Ride Date : <b style='color:brown'>"+data[0]['ride_date']+"</b></p><p>User Email : <b style='color:brown'>"+data[0]['email_id']+"</b></p><p>Date Of SignUp : <b style='color:brown'>"+data[0]['dateofsignup']+"</b></p><p>PickUp Point : <b style='color:brown'>"+data[0]['from']+"</b></p><p>Drop Point : <b style='color:brown'>"+data[0]['to']+"</b></p><p>CabType : <b style='color:brown'>"+data[0]['cab_type']+"</b></p><p>TotalDistance : <b style='color:brown'>"+data[0]['total_distance']+"km</b></p><p>Luggage weight : <b style='color:brown'>"+data[0]['luggage']+" kg</b></p><p>Total Fare : <b style='color:brown'>Rs."+data[0]['total_fare']+"/- Rs.</b><p>Ride Status : <b style='color:brown'>Pending</b></p>");
             
         $('#myinfo').modal('show');
 
       }else {
 
-        $('.modal-body-info').html("<p>Ride Id : <b style='color:brown'>"+data[0]['ride_id']+"</b></p><p>User Name : <b style='color:brown'>"+data[0]['name']+"</b></p><p>User Id : <b style='color:brown'>"+data[0]['user_id']+"</b></p><p>Ride Date : <b style='color:brown'>"+data[0]['ride_date']+"</b></p><p>User Email : <b style='color:brown'>"+data[0]['email_id']+"</b></p><p>Date Of SignUp : <b style='color:brown'>"+data[0]['dateofsignup']+"</b></p><p>PickUp Point : <b style='color:brown'>"+data[0]['from']+"</b></p><p>Drop Point : <b style='color:brown'>"+data[0]['to']+"</b></p><p>CabType : <b style='color:brown'>"+data[0]['cab_type']+"</b></p><p>TotalDistance : <b style='color:brown'>"+data[0]['total_distance']+"km</b></p><p>Luggage weight : <b style='color:brown'>"+data[0]['luggage']+" kg</b></p><p>Total Fare : <b style='color:brown'>Rs."+data[0]['total_fare']+"</b><p>Ride Status : <b style='color:brown'>Cancelled</b></p>");
+        $('.modal-body-info').html("<p>Ride Id : <b style='color:brown'>"+data[0]['ride_id']+"</b></p><p>User Name : <b style='color:brown'>"+data[0]['name']+"</b></p><p>User Id : <b style='color:brown'>"+data[0]['user_id']+"</b></p><p>Ride Date : <b style='color:brown'>"+data[0]['ride_date']+"</b></p><p>User Email : <b style='color:brown'>"+data[0]['email_id']+"</b></p><p>Date Of SignUp : <b style='color:brown'>"+data[0]['dateofsignup']+"</b></p><p>PickUp Point : <b style='color:brown'>"+data[0]['from']+"</b></p><p>Drop Point : <b style='color:brown'>"+data[0]['to']+"</b></p><p>CabType : <b style='color:brown'>"+data[0]['cab_type']+"</b></p><p>TotalDistance : <b style='color:brown'>"+data[0]['total_distance']+"km</b></p><p>Luggage weight : <b style='color:brown'>"+data[0]['luggage']+" kg</b></p><p>Total Fare : <b style='color:brown'>Rs."+data[0]['total_fare']+"/- Rs.</b><p>Ride Status : <b style='color:brown'>Cancelled</b></p>");
             
         $('#myinfo').modal('show');
 
@@ -327,6 +329,8 @@ function getInfo(ride_id) {
   })
 
 }
+
+// ----------------------------------Get All User Details--------------------------------
 
 $('#GetAllUserDetails').on('click',function(){
 
@@ -402,7 +406,7 @@ $.ajax({
     
     for(var i = 0; i<data.length;i++) {
 
-      $('#GetCancelledRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">view</button></td></tr>');
+      $('#GetCancelledRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'km</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'/- Rs.</td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">view</button></td></tr>');
 
     }
     
@@ -446,7 +450,7 @@ $.ajax({
      
       for(var i = 0; i<data.length;i++) {
 
-        $('#GetPendingTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><a class="btn btn-outline-danger">Pending</a></td><td><button class="btn btn-danger" onclick="CancelRide('+data[i]["ride_id"]+')">Cancel</button><td><button class="btn btn-outline-success" onclick="ApproveRide('+data[i]["ride_id"]+')">Approve</button></td></td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">View</button></td></tr>');
+        $('#GetPendingTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'km</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'/- Rs.</td><td><a class="btn btn-outline-danger">Pending</a></td><td><button class="btn btn-danger" onclick="CancelRide('+data[i]["ride_id"]+')">Cancel</button><td><button class="btn btn-outline-success" onclick="ApproveRide('+data[i]["ride_id"]+')">Approve</button></td></td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">View</button></td></tr>');
 
 
       }
@@ -468,6 +472,7 @@ $('#GetAllUserTable').hide();
 
 });
 
+// --------------------------------------Get All Rides For Admin------------------------
 
 function GetAllRidesAdmin() {
 
@@ -491,16 +496,16 @@ function GetAllRidesAdmin() {
 
         if(data[i]['status']==1) {
 
-          $('#GetAllRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><a class="btn btn-outline-danger">Pending</a></td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">view</button></td></tr>');
+          $('#GetAllRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'km</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'/- Rs.</td><td><a class="btn btn-outline-danger">Pending</a></td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">view</button></td></tr>');
 
         }else if(data[i]['status']==2) {
 
-          $('#GetAllRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><a class="btn btn-outline-success">Completed</a></td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">view</button></td></tr>');
+          $('#GetAllRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'km</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'/- Rs.</td><td><a class="btn btn-outline-success">Completed</a></td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">view</button></td></tr>');
 
 
         }else {
 
-        $('#GetAllRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><a class="btn btn-outline-primary">Cancelled</a></td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">view</button></td></tr>');
+        $('#GetAllRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'km</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'/- Rs.</td><td><a class="btn btn-outline-primary">Cancelled</a></td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">view</button></td></tr>');
 
         }
 
@@ -527,7 +532,7 @@ function GetTotalEarningAdmin() {
       var data = JSON.parse(res);
 
    
-      $('#TotalExpenses').html(data["sum(`total_fare`)"]);
+      $('#TotalExpenses').html(data["sum(`total_fare`)"]+'/- Rs.');
 
     }
 
@@ -570,6 +575,8 @@ function CancelRide(ride_id) {
 
 }
 
+// ------------------------------------------Approve Ride--------------------------------
+
 function ApproveRide(ride_id) {
 
 var id = ride_id;
@@ -602,6 +609,7 @@ $.ajax({
 
 }
 
+// --------------------------------------------Block User-------------------------------
 
 function blockUser(user_id) {
 
@@ -664,6 +672,8 @@ function GetUserImage() {
 
 }
 
+// ------------------------------------Get User Information------------------------------
+
 function getUserInfo(user_id) {
 
 var id = user_id;
@@ -701,6 +711,8 @@ $.ajax({
 })
 
 }
+
+// ----------------------------------Un Block User-------------------------------------
 
 function UnblockUser(user_id) {
 

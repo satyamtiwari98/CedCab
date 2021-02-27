@@ -1,5 +1,7 @@
 <?php
+// -----------------------------------This Is Logout Page-----------------------------------------------------
 session_start();
+
 if(isset($_SESSION['admin']['email_id'])) {
 
     session_destroy();

@@ -85,6 +85,7 @@ class Location extends Dbcon{
 
     }
 
+// ----------------------------------Add Location----------------------------------------
 
     public function AddLocation($name,$distance){
         try {
@@ -115,6 +116,8 @@ class Location extends Dbcon{
     }
 
 
+// -----------------------------------Get All Location-----------------------------------
+
     public function GetAllLocation(){
 
         try {
@@ -140,6 +143,9 @@ class Location extends Dbcon{
 
     }
     }
+
+
+    // ------------------------------------Get Location Information----------------------
 
 
     public function GetLocationInfo($id){
@@ -168,6 +174,8 @@ class Location extends Dbcon{
     }
 
     }
+
+    // --------------------------------------Make It Available--------------------------
 
     public function MakeItAvailable($location_id){
 
@@ -198,6 +206,9 @@ class Location extends Dbcon{
     }
 
     }
+
+
+    // -----------------------------Make It Un Available---------------------------------
 
 
     public function MakeItUnAvailable($location_id){

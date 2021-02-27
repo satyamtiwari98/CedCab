@@ -110,6 +110,9 @@ if(isset($_POST['action'])) {
 
             break;
 
+// -------------------------------------Edit Profile-------------------------------------
+
+
         case 'editProfile':
             $target_dir = "assets/uploads/";
             $targetfile = $_FILES['file']['name'];
@@ -236,7 +239,6 @@ if(isset($_POST['action'])) {
             $fare = $_POST['fare'];
             $totalDistance = $_POST['total'];
 
-
             $user = $_POST['user'];
             
             $userObject = new User();
@@ -260,6 +262,9 @@ if(isset($_POST['action'])) {
 
             break;
 
+
+// ------------------------------Get Pending Rides For Admin-----------------------------
+
         case 'GetPendingRidesAdmin':
     
                 $rideObject = new Ride();
@@ -281,6 +286,8 @@ if(isset($_POST['action'])) {
 
             break;
 
+// ------------------------------------Get All Rides For Admin---------------------------
+
         case 'GetAllRidesAdmin':
     
                 $rideObject = new Ride();
@@ -301,6 +308,8 @@ if(isset($_POST['action'])) {
             echo json_encode($result);
 
             break;
+
+// -----------------------------Get Completed Rides For Admin-------------------------
 
 
         case 'GetCompletedRidesAdmin':
@@ -324,6 +333,8 @@ if(isset($_POST['action'])) {
 
             break;
 
+// --------------------------------Get Cancel Rides Form Admin---------------------------
+
 
         case 'GetCancelledRidesAdmin':
     
@@ -333,6 +344,9 @@ if(isset($_POST['action'])) {
                 echo json_encode($result);
     
                 break;
+
+
+// ---------------------------------Change Password-----------------------------------------
 
 
 
@@ -361,6 +375,8 @@ if(isset($_POST['action'])) {
 
             break;
 
+// ---------------------------Get Total Earnings of Admin-------------------------------
+
         case 'GetTotalEarningAdmin':
     
                 $rideObject = new Ride();
@@ -381,6 +397,8 @@ if(isset($_POST['action'])) {
             echo $result;
 
             break;
+
+// ---------------------------------Approve Rides---------------------------------------
 
         case 'ApproveRide':
                 $ride_id = $_POST['ride_id'];
@@ -414,6 +432,8 @@ if(isset($_POST['action'])) {
             echo json_encode($result);
             break;
 
+// ----------------------------------Get All Users Details------------------------------
+
 
         case 'GetAllUser':
             $userObject = new User();
@@ -421,6 +441,8 @@ if(isset($_POST['action'])) {
 
             echo json_encode($result);
             break;
+
+// ---------------------------------Get Users Info--------------------------------------
 
 
         case 'GetUserInfo':
@@ -431,6 +453,9 @@ if(isset($_POST['action'])) {
     
                 echo json_encode($result);
                 break;
+
+// ---------------------------------Block User-----------------------------------------
+
 
         case 'BlockUser':
                 $user_id = $_POST['user_id'];
@@ -443,6 +468,9 @@ if(isset($_POST['action'])) {
         
                 break;
 
+// ---------------------------------Un Block User----------------------------------------
+
+
         case 'UnBlockUser':
                 $user_id = $_POST['user_id'];
             
@@ -453,6 +481,9 @@ if(isset($_POST['action'])) {
                 echo $result;
             
                 break;
+
+
+// -----------------------------Add Location--------------------------------------------
 
         case 'AddLocation':
             $name = $_POST['name'];
@@ -465,6 +496,9 @@ if(isset($_POST['action'])) {
 
             break;
 
+
+// ---------------------------Get All Location------------------------------------------
+
         case 'GetAllLocation':
 
             $locationObject = new Location();
@@ -473,6 +507,8 @@ if(isset($_POST['action'])) {
             echo json_encode($result);
 
             break;
+
+// ---------------------------Get Location Info-----------------------------------------
 
         case 'GetLocationInfo':
             $id = $_POST['id'];
@@ -484,6 +520,8 @@ if(isset($_POST['action'])) {
 
             break;
 
+// ------------------------------Make It Available--------------------------------------
+
         case 'MakeItAvailable':
             $location_id = $_POST['location_id'];
 
@@ -493,6 +531,8 @@ if(isset($_POST['action'])) {
             echo $result;
 
             break;
+
+// ------------------------------Make It UnAvailable----------------------------------
 
         case 'MakeItUnAvailable':
                 $location_id = $_POST['location_id'];

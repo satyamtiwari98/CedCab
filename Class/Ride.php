@@ -547,6 +547,9 @@ class Ride extends Dbcon {
 
     }
 
+// -----------------------------------------Get Pending Rides Form Admin-----------------
+
+
     public function GetPendingRidesAdmin() {
 
         try{
@@ -614,7 +617,7 @@ class Ride extends Dbcon {
 
     }
 
-
+// ------------------------------------Get All Rides For Admin--------------------------
 
     public function GetAllRidesAdmin() {
 
@@ -683,6 +686,8 @@ class Ride extends Dbcon {
 
     }
 
+
+// ---------------------------------Get Completed Rides For Admin-----------------------
 
 
     public function GetCompletedRidesAdmin() {
@@ -753,7 +758,7 @@ class Ride extends Dbcon {
 
     }
 
-
+// ---------------------------------Get Cancelled Rides For Admin-----------------------
 
     public function GetCancelledRidesAdmin() {
 
@@ -817,6 +822,7 @@ class Ride extends Dbcon {
 
     }
 
+// -------------------------------------Get Total Earning For Admin---------------------
 
 
     public function GetTotalEarningAdmin() {
@@ -875,6 +881,8 @@ class Ride extends Dbcon {
     }
 
     }
+
+// ------------------------------------------Approve Rides------------------------------
 
 
     public function ApproveRide($ride_id) {
