@@ -26,7 +26,7 @@ class Location extends Dbcon{
 
         try {
        
-        $sqlQuery = "Select * from `".self::table_location."`";
+        $sqlQuery = "Select * from `".self::table_location."` where `is_available`='1'";
 
         $result = $this->connect->query($sqlQuery);
 
