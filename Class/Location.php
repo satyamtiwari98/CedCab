@@ -128,10 +128,14 @@ class Location extends Dbcon{
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {
+
             $i=0;
+
             while($row = $result->fetch_assoc()) {
+
                 $this->data[$i] = $row;
                 ++$i;
+                
               }
             
         }
@@ -158,10 +162,14 @@ class Location extends Dbcon{
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {
+
             $i=0;
+
             while($row = $result->fetch_assoc()) {
+
                 $this->data[$i] = $row;
                 ++$i;
+
               }
             
         }
@@ -252,7 +260,7 @@ class Location extends Dbcon{
         $this->location = $location_id;
 
         $sqlQuery = "Delete from `".self::table_location."` where `id`='$this->location'";
-        // die($sqlQuery);
+        
 
         $result = $this->connect->query($sqlQuery);
 

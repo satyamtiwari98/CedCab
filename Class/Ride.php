@@ -523,11 +523,14 @@ class Ride extends Dbcon {
         $this->select1 = $select1;
         $this->select2 = $select2;
 
-        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')){
+        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+
             $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='1' order by $this->select2 $this->select1";
+
         }else{
 
         $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='1'";
+        
         }
 
         $result = $this->connect->query($sqlQuery);
@@ -565,15 +568,18 @@ class Ride extends Dbcon {
             $this->select1 = $select1;
             $this->select2 = $select2;
 
-            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')){
+            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+
                 $sqlQuery = "Select * from `".self::table_ride."` where  `status`='1' order by $this->select2 $this->select1";
-                //   die($sqlQuery);
+                
             }else {
+
             $sqlQuery = "Select * from `".self::table_ride."` where  `status`='1'";
+
             }
 
 
-        // $sqlQuery = "Select * from `".self::table_ride."` where  `status`='1'";
+        
 
         $result = $this->connect->query($sqlQuery);
 
@@ -612,14 +618,17 @@ class Ride extends Dbcon {
         $this->select1 = $select1;
         $this->select2 = $select2;
 
-        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')){
+        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+
             $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' order by $this->select2 $this->select1";
-        }else{
+
+        }else {
 
             $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id'";
+
         }
 
-        // $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id'";
+        
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {
@@ -653,14 +662,17 @@ class Ride extends Dbcon {
             $this->select1 = $select1;
             $this->select2 = $select2;
 
-            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')){
+            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+
                 $sqlQuery = "Select * from `".self::table_ride."`  order by $this->select2 $this->select1";
-            }else{
+
+            }else {
     
                 $sqlQuery = "Select * from `".self::table_ride."`";
+
             }
 
-        // $sqlQuery = "Select * from `".self::table_ride."`";
+        
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {
@@ -697,11 +709,14 @@ class Ride extends Dbcon {
         $this->select1 = $select1;
         $this->select2 = $select2;
 
-        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')){
+        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+
             $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='2' order by $this->select2 $this->select1";
-        }else{
+
+        }else {
 
             $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='2'";
+
         }
 
         
@@ -741,11 +756,15 @@ class Ride extends Dbcon {
 
             $this->select1 = $select1;
             $this->select2 = $select2;
-            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')){
+
+            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+
                 $sqlQuery = "Select * from `".self::table_ride."` where  `status`='2' order by $this->select2 $this->select1";
-                //   die($sqlQuery);
+                
             }else {
+
             $sqlQuery = "Select * from `".self::table_ride."` where  `status`='2'";
+
             }
 
       
@@ -787,14 +806,16 @@ class Ride extends Dbcon {
         $this->select1 = $select1;
         $this->select2 = $select2;
 
-        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')){
+        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+
             $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='0' order by $this->select2 $this->select1";
-        }else{
+
+        }else {
 
             $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='0'";
+
         }
 
-        // $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='0'";
 
         $result = $this->connect->query($sqlQuery);
 
@@ -830,14 +851,16 @@ class Ride extends Dbcon {
             $this->select1 = $select1;
             $this->select2 = $select2;
 
-            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')){
+            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+
                 $sqlQuery = "Select * from `".self::table_ride."` where  `status`='0' order by $this->select2 $this->select1";
-                //   die($sqlQuery);
+                
             }else {
+
             $sqlQuery = "Select * from `".self::table_ride."` where  `status`='0'";
+
             }
 
-        // $sqlQuery = "Select * from `".self::table_ride."` where `status`='0'";
 
         $result = $this->connect->query($sqlQuery);
 
@@ -994,6 +1017,7 @@ class Ride extends Dbcon {
         try {
 
         $this->ride_id = $ride_id;
+
         $sqlQuery = "Select * from `".self::table_ride."` FULL  JOIN `tbl_user` ON customer_user_id = tbl_user.user_id  where `ride_id`='$this->ride_id'";
 
         $result = $this->connect->query($sqlQuery);

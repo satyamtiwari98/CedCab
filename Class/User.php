@@ -308,15 +308,22 @@ class User extends Dbcon {
 // -------------------------------------Get All Users Details----------------------------
 
     public function GetAllUser(){
+
         try {
+
         $sqlQuery = "Select * from `".self::table_user."`";
+
         $result = $this->connect->query($sqlQuery);
         
         if($result->num_rows>0) {
+
             $i=0;
+
             while($row = $result->fetch_assoc()) {
+
                 $this->data[$i] = $row;
                 ++$i;
+
               }
             
         }
@@ -345,10 +352,14 @@ class User extends Dbcon {
         $result = $this->connect->query($sqlQuery);
 
         if($result->num_rows>0) {
+
             $i=0;
+
             while($row = $result->fetch_assoc()) {
+
                 $this->data[$i] = $row;
                 ++$i;
+
               }
             
         }
@@ -372,9 +383,8 @@ class User extends Dbcon {
 
         try {
 
-        $this->user_id = $user_id;
+            $this->user_id = $user_id;
 
-    
 
             $sqlQuery = "update `".self::table_user."` set `status`='0' where `user_id`='$this->user_id' and `status`='1'";
 
@@ -410,9 +420,8 @@ class User extends Dbcon {
 
         try {
 
-        $this->user_id = $user_id;
+            $this->user_id = $user_id;
 
-    
 
             $sqlQuery = "update `".self::table_user."` set `status`='1' where `user_id`='$this->user_id' and `status`='0'";
 
@@ -432,11 +441,11 @@ class User extends Dbcon {
         
      
 
-    } catch(Exception $e) {
+        } catch(Exception $e) {
 
-        return $e;
+             return $e;
 
-    }
+        }
 
     }
 

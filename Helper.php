@@ -271,12 +271,12 @@ if(isset($_POST['action'])) {
             $select1 = $_POST['select1'];
             $select2 = $_POST['select2'];
     
-                $rideObject = new Ride();
-                $result = $rideObject->GetPendingRidesAdmin($select1,$select2);
+            $rideObject = new Ride();
+            $result = $rideObject->GetPendingRidesAdmin($select1,$select2);
     
-                echo json_encode($result);
+            echo json_encode($result);
     
-                break;
+            break;
 
 // ------------------------------------Get All Rides details---------------------------------------------------
 
@@ -298,12 +298,12 @@ if(isset($_POST['action'])) {
             $select1 = $_POST['select1'];
             $select2 = $_POST['select2'];
     
-                $rideObject = new Ride();
-                $result = $rideObject->GetAllRidesAdmin($select1,$select2);
+            $rideObject = new Ride();
+            $result = $rideObject->GetAllRidesAdmin($select1,$select2);
     
-                echo json_encode($result);
+            echo json_encode($result);
     
-                break;
+            break;
 
 // -------------------------Get all completed rides details--------------------------------------------------
 
@@ -325,12 +325,13 @@ if(isset($_POST['action'])) {
         case 'GetCompletedRidesAdmin':
             $select1 = $_POST['select1'];
             $select2 = $_POST['select2'];
-                $rideObject = new Ride();
-                $result = $rideObject->GetCompletedRidesAdmin($select1,$select2);
+
+            $rideObject = new Ride();
+            $result = $rideObject->GetCompletedRidesAdmin($select1,$select2);
     
-                echo json_encode($result);
+            echo json_encode($result);
     
-                break;
+            break;
 
 // ---------------------Get all Cancelled Rides Details--------------------------------------------------------
 
@@ -353,12 +354,12 @@ if(isset($_POST['action'])) {
             $select1 = $_POST['select1'];
             $select2 = $_POST['select2'];
     
-                $rideObject = new Ride();
-                $result = $rideObject->GetCancelledRidesAdmin($select1,$select2);
+            $rideObject = new Ride();
+            $result = $rideObject->GetCancelledRidesAdmin($select1,$select2);
     
-                echo json_encode($result);
+            echo json_encode($result);
     
-                break;
+            break;
 
 
 // ---------------------------------Change Password-----------------------------------------
@@ -394,12 +395,12 @@ if(isset($_POST['action'])) {
 
         case 'GetTotalEarningAdmin':
     
-                $rideObject = new Ride();
-                $result = $rideObject->GetTotalEarningAdmin();
+            $rideObject = new Ride();
+            $result = $rideObject->GetTotalEarningAdmin();
                 
-                echo json_encode($result);
+            echo json_encode($result);
     
-                break;
+            break;
 
 // -----------------------------------Cancel Pending Rides-----------------------------------------------------
 
@@ -427,14 +428,14 @@ if(isset($_POST['action'])) {
 // ---------------------------------Approve Rides---------------------------------------
 
         case 'ApproveRide':
-                $ride_id = $_POST['ride_id'];
+            $ride_id = $_POST['ride_id'];
     
-                $rideObject = new Ride();
-                $result = $rideObject->ApproveRide($ride_id);
+            $rideObject = new Ride();
+            $result = $rideObject->ApproveRide($ride_id);
     
-                echo $result;
+            echo $result;
     
-                break;
+            break;
 
 // --------------------------------------Get User Image on User Dashboard-------------------------------------
 
@@ -472,41 +473,41 @@ if(isset($_POST['action'])) {
 
 
         case 'GetUserInfo':
-                $user_id = $_POST['user_id'];
+            $user_id = $_POST['user_id'];
     
-                $userObject = new User();
-                $result = $userObject->GetUserInfo($user_id);
+            $userObject = new User();
+            $result = $userObject->GetUserInfo($user_id);
     
-                echo json_encode($result);
-                break;
+            echo json_encode($result);
+            break;
 
 // ---------------------------------Block User-----------------------------------------
 
 
         case 'BlockUser':
-                $user_id = $_POST['user_id'];
+            $user_id = $_POST['user_id'];
         
-                $userObject = new User();
-                $result = $userObject->BlockUser($user_id);
+            $userObject = new User();
+            $result = $userObject->BlockUser($user_id);
                 
         
-                echo $result;
+            echo $result;
         
-                break;
+            break;
 
 // ---------------------------------Un Block User----------------------------------------
 
 
         case 'UnBlockUser':
-                $user_id = $_POST['user_id'];
+            $user_id = $_POST['user_id'];
             
-                $userObject = new User();
-                $result = $userObject->UnBlockUser($user_id);
+            $userObject = new User();
+            $result = $userObject->UnBlockUser($user_id);
                     
             
-                echo $result;
+            echo $result;
             
-                break;
+            break;
 
 
 // -----------------------------Add Location--------------------------------------------
@@ -549,14 +550,14 @@ if(isset($_POST['action'])) {
 // -----------------------Edit Location Information-------------------------------------
 
         case 'EditLocationInfo':
-                $id = $_POST['id'];
+            $id = $_POST['id'];
     
-                $locationObject = new Location();
-                $result = $locationObject->EditLocationInfo($id);
+            $locationObject = new Location();
+            $result = $locationObject->EditLocationInfo($id);
     
-                echo json_encode($result);
+            echo json_encode($result);
     
-                break;
+            break;
 
 // ---------------------------Update Location-------------------------------------------
 

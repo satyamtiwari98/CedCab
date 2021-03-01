@@ -87,6 +87,7 @@
 <div class="container">
 <h1 id="allridesheading">All Rides Available :-</h1>
 
+<!-- ----------------------------------Sorting Elements---------------------------------------------------- -->
 
 <div id="sorting">
 <select id="select1">
@@ -226,6 +227,7 @@ include_once "assets/template/footer.php";
 
 $(document).ready(function() {
 
+
 GetAllUser();
 $('#usersheading').hide();
 $('#GetAllUserTable').hide();
@@ -258,6 +260,8 @@ $('#completedridesheading').hide();
 $('#GetCompletedRidesTable').hide();
 
 
+// --------------------------------------Sorting Button Function----------------------------------------------
+
 $('#sortingButton').on('click',function(){
  
     GetCompletedRidesAdmin();
@@ -267,12 +271,15 @@ $('#sortingButton').on('click',function(){
 
 });
 
+
+
+
 });
 
 //---------------------------Get All Completed Rides of a Particular user--------------------------------------
 
 $('#GetCompletedRides').on('click',function(){
-// location.reload();
+
   $('#GetCompletedRidesTable').show();
   $('#GetAllRidesTable').hide();
   $('#GetPendingTable').hide();
@@ -375,7 +382,6 @@ function getInfo(ride_id) {
 // ----------------------------------Get All User Details--------------------------------
 
 $('#GetAllUserDetails').on('click',function(){
-  // location.reload();
 
 $('#GetCancelledRidesTable').hide();
 $('#GetCompletedRidesTable').hide();
@@ -427,7 +433,7 @@ function GetAllUser(){
 //-------------------------------Get Cancelled Rides Of a particular user--------------------------------------
 
 $('#GetCancelledRides').on('click',function(){
-  // location.reload();
+  
 $('#GetCancelledRidesTable').show();
 $('#GetCompletedRidesTable').hide();
 $('#GetAllRidesTable').hide();
@@ -489,7 +495,7 @@ $.ajax({
 //--------------------------Get all the pending Rides of a Particular user-------------------------------------
 
 $('#GetPendingRides').on('click',function(){
-  // location.reload();
+
   $('#GetCompletedRidesTable').hide();
   $('#GetAllRidesTable').hide();
   $('#GetPendingTable').show();
