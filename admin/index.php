@@ -344,17 +344,17 @@ function getInfo(ride_id) {
 
 $('#GetAllUserDetails').on('click',function(){
 
-  $('#GetCancelledRidesTable').hide();
+$('#GetCancelledRidesTable').hide();
 $('#GetCompletedRidesTable').hide();
 $('#GetAllRidesTable').hide();
 $('#GetPendingTable').hide();
 $('#GetAllUserTable').show();
 
 $('#completedridesheading').hide();
-  $('#pendingridesheading').hide();
-  $('#allridesheading').hide();
-  $('#cancelledridesheading').hide();
-  $('#usersheading').show();
+$('#pendingridesheading').hide();
+$('#allridesheading').hide();
+$('#cancelledridesheading').hide();
+$('#usersheading').show();
 
   
 });
@@ -400,10 +400,10 @@ $('#GetPendingTable').hide();
 $('#GetAllUserTable').hide();
 
 $('#completedridesheading').hide();
-  $('#pendingridesheading').hide();
-  $('#allridesheading').hide();
-  $('#cancelledridesheading').show();
-  $('#usersheading').hide();
+$('#pendingridesheading').hide();
+$('#allridesheading').hide();
+$('#cancelledridesheading').show();
+$('#usersheading').hide();
 
 
 
@@ -502,10 +502,10 @@ $('#GetCancelledRidesTable').hide();
 $('#GetAllUserTable').hide();
 
 $('#completedridesheading').hide();
-  $('#pendingridesheading').hide();
-  $('#allridesheading').show();
-  $('#cancelledridesheading').hide();
-  $('#usersheading').hide();
+$('#pendingridesheading').hide();
+$('#allridesheading').show();
+$('#cancelledridesheading').hide();
+$('#usersheading').hide();
 
 
 });
@@ -726,9 +726,9 @@ $.ajax({
   success:function(res) {
 
     var data = JSON.parse(res);
-    console.log(data);
+  
 
-    if(data[0]['status']==1) {
+    if(data[0]['status'] == 1) {
 
       $('.modal-body-userinfo').html("<p>User Id : <b style='color:brown'>"+data[0]['user_id']+"</b></p><p>User Name : <b style='color:brown'>"+data[0]['name']+"</b></p><p>User Email : <b style='color:brown'>"+data[0]['email_id']+"</b></p><p>Date Of SignUp : <b style='color:brown'>"+data[0]['dateofsignup']+"</b></p><p>Mobile Number : <b style='color:brown'>"+data[0]['mobile']+"</b></p><p>User Status : <b style='color:brown'>UnBlocked</b></p>");
           
@@ -736,9 +736,11 @@ $.ajax({
 
 
     }else {
+
       $('.modal-body-userinfo').html("<p>User Id : <b style='color:brown'>"+data[0]['user_id']+"</b></p><p>User Name : <b style='color:brown'>"+data[0]['name']+"</b></p><p>User Email : <b style='color:brown'>"+data[0]['email_id']+"</b></p><p>Date Of SignUp : <b style='color:brown'>"+data[0]['dateofsignup']+"</b></p><p>Mobile Number : <b style='color:brown'>"+data[0]['mobile']+"</b></p><p>User Status : <b style='color:brown'>Blocked</b></p>");
           
-          $('#myuserinfo').modal('show');
+      $('#myuserinfo').modal('show');
+
     }
 
  

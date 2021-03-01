@@ -6,7 +6,6 @@
 
 if(isset($_SESSION['user']['email_id'])) {
 
-  // die("You are already Logged In !!!!");
   header('location:user/index.php');
 
 }
