@@ -69,6 +69,22 @@
 <div class="container">
 
 
+<div id="sorting">
+<select id="select1">
+<option value="0" default>Please select</option>
+<option value="ASC">Asc</option>
+<option value="DESC">Desc</option>
+</select>
+<select id="select2">
+<option value="0" default>Please select</option>
+<option value="ride_date">Ride Date</option>
+<option value="total_fare">Total Fare</option>
+</select>
+<button type="button" name="sortingButton" id="sortingButton" >Apply</button>
+
+</div>
+
+
 <!----------------------------Get Pending Rides Table--------------------------------------------------------->
 <h1 id="pendingridesheading">All Pending Rides Available :-</h1>
 <table class="table table-success table-striped" id="GetPendingTable">
@@ -200,6 +216,8 @@ $(document).ready(function(){
    
 });
 
+
+
 //-------------------------------------Book Ride Function------------------------------------------------------
 
 $('#BookRide').on('click',function(){
@@ -283,6 +301,17 @@ GetCompletedRides();
 $('#GetCompletedRidesTable').hide();
 $('#completedridesheading').hide();
 
+
+
+});
+
+$('#sortingButton').on('click',function(){
+ 
+ GetCompletedRides();
+ GetCanelledRides();
+ GetPendingRides();
+ GetAllRides();
+
 });
 
 //---------------------------Get All Completed Rides of a Particular user--------------------------------------
@@ -306,12 +335,19 @@ $('#GetCompletedRides').on('click',function(){
 
 function GetCompletedRides() {
 
+  var select1 = $('#select1').val();
+var select2 = $('#select2').val();
+$("th").css("display","none");
+$("td").css("display","none");
+
 var user_id = <?php echo $_SESSION['user']['user_id'];?>;
 
 $.ajax({
   url:'../Helper.php',
   type:'POST',
   data:{
+    'select1':select1,
+    'select2':select2,
     'user_id':user_id,
     'action':'GetCompletedRides',
   },
@@ -402,12 +438,20 @@ $('#usersheading').hide();
 
 function GetCanelledRides(){
 
+  var select1 = $('#select1').val();
+var select2 = $('#select2').val();
+$("th").css("display","none");
+$("td").css("display","none");
+
+
 var user_id = <?php echo $_SESSION['user']['user_id'];?>;
 
 $.ajax({
   url:'../Helper.php',
   type:'POST',
   data:{
+    'select1':select1,
+    'select2':select2,
     'user_id':user_id,
     'action':'GetCancelledRides',
   },
@@ -451,6 +495,10 @@ $('#GetPendingRides').on('click',function(){
 });
 
 function GetPendingRides() {
+  var select1 = $('#select1').val();
+var select2 = $('#select2').val();
+$("th").css("display","none");
+$("td").css("display","none");
 
 var user_id = <?php echo $_SESSION['user']['user_id'];?>;
 
@@ -458,6 +506,8 @@ $.ajax({
     url:'../Helper.php',
     type:'POST',
     data:{
+      'select1':select1,
+    'select2':select2,
         'user_id':user_id,
         'action':'GetPendingRides',
     },
@@ -500,12 +550,19 @@ $('#usersheading').hide();
 
 function GetAllRides() {
 
+  var select1 = $('#select1').val();
+var select2 = $('#select2').val();
+$("th").css("display","none");
+$("td").css("display","none");
+
   var user_id = <?php echo $_SESSION['user']['user_id']; ?>;
 
   $.ajax({
     url:'../Helper.php',
     type:'POST',
     data:{
+      'select1':select1,
+      'select2':select2,
       'user_id':user_id,
       'action':'GetAllRides',
     },

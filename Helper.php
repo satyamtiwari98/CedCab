@@ -254,9 +254,11 @@ if(isset($_POST['action'])) {
 
         case 'GetPendingRides':
             $user_id = $_POST['user_id'];
+            $select1 = $_POST['select1'];
+            $select2 = $_POST['select2'];
 
             $rideObject = new Ride();
-            $result = $rideObject->GetPendingRides($user_id);
+            $result = $rideObject->GetPendingRides($user_id,$select1,$select2);
 
             echo json_encode($result);
 
@@ -266,9 +268,11 @@ if(isset($_POST['action'])) {
 // ------------------------------Get Pending Rides For Admin-----------------------------
 
         case 'GetPendingRidesAdmin':
+            $select1 = $_POST['select1'];
+            $select2 = $_POST['select2'];
     
                 $rideObject = new Ride();
-                $result = $rideObject->GetPendingRidesAdmin();
+                $result = $rideObject->GetPendingRidesAdmin($select1,$select2);
     
                 echo json_encode($result);
     
@@ -278,9 +282,11 @@ if(isset($_POST['action'])) {
 
         case 'GetAllRides':
             $user_id = $_POST['user_id'];
+            $select1 = $_POST['select1'];
+            $select2 = $_POST['select2'];
 
             $rideObject = new Ride();
-            $result = $rideObject->GetAllRides($user_id);
+            $result = $rideObject->GetAllRides($user_id,$select1,$select2);
 
             echo json_encode($result);
 
@@ -289,9 +295,11 @@ if(isset($_POST['action'])) {
 // ------------------------------------Get All Rides For Admin---------------------------
 
         case 'GetAllRidesAdmin':
+            $select1 = $_POST['select1'];
+            $select2 = $_POST['select2'];
     
                 $rideObject = new Ride();
-                $result = $rideObject->GetAllRidesAdmin();
+                $result = $rideObject->GetAllRidesAdmin($select1,$select2);
     
                 echo json_encode($result);
     
@@ -301,9 +309,11 @@ if(isset($_POST['action'])) {
 
         case 'GetCompletedRides':
             $user_id = $_POST['user_id'];
+            $select1 = $_POST['select1'];
+            $select2 = $_POST['select2'];
 
             $rideObject = new Ride();
-            $result = $rideObject->GetCompletedRides($user_id);
+            $result = $rideObject->GetCompletedRides($user_id,$select1,$select2);
 
             echo json_encode($result);
 
@@ -313,9 +323,10 @@ if(isset($_POST['action'])) {
 
 
         case 'GetCompletedRidesAdmin':
-    
+            $select1 = $_POST['select1'];
+            $select2 = $_POST['select2'];
                 $rideObject = new Ride();
-                $result = $rideObject->GetCompletedRidesAdmin();
+                $result = $rideObject->GetCompletedRidesAdmin($select1,$select2);
     
                 echo json_encode($result);
     
@@ -325,9 +336,11 @@ if(isset($_POST['action'])) {
 
         case 'GetCancelledRides':
             $user_id = $_POST['user_id'];
+            $select1 = $_POST['select1'];
+            $select2 = $_POST['select2'];
 
             $rideObject = new Ride();
-            $result = $rideObject->GetCancelledRides($user_id);
+            $result = $rideObject->GetCancelledRides($user_id,$select1,$select2);
 
             echo json_encode($result);
 
@@ -337,9 +350,11 @@ if(isset($_POST['action'])) {
 
 
         case 'GetCancelledRidesAdmin':
+            $select1 = $_POST['select1'];
+            $select2 = $_POST['select2'];
     
                 $rideObject = new Ride();
-                $result = $rideObject->GetCancelledRidesAdmin();
+                $result = $rideObject->GetCancelledRidesAdmin($select1,$select2);
     
                 echo json_encode($result);
     

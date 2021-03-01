@@ -32,7 +32,7 @@
   </div>
 </div>
 
-<!---------------------------------------Total Expenses Card---------------------------------------------- -->
+<!-----------------------------Total Expenses Card------------------------------------->
 
 <div class="card" style="width: 18rem;">
 
@@ -85,6 +85,23 @@
 <!---------------------------------------------Tables Container-------------------------------------------  -->
 
 <div class="container">
+<h1 id="allridesheading">All Rides Available :-</h1>
+
+
+<div id="sorting">
+<select id="select1">
+<option value="0" default>Please select</option>
+<option value="ASC">Asc</option>
+<option value="DESC">Desc</option>
+</select>
+<select id="select2">
+<option value="0" default>Please select</option>
+<option value="ride_date">Ride Date</option>
+<option value="total_fare">Total Fare</option>
+</select>
+<button type="button" name="sortingButton" id="sortingButton" >Apply</button>
+
+</div>
 
 
 <!----------------------------Get Pending Rides Table--------------------------------------------------------->
@@ -98,7 +115,7 @@
 
 
 <!--------------------------------------Get all Rides Table---------------------------------------------->
-<h1 id="allridesheading">All Rides Available :-</h1>
+
 <table class="table table-success table-striped" id="GetAllRidesTable">
 <thead>
   </thead>
@@ -240,12 +257,22 @@ GetCompletedRidesAdmin();
 $('#completedridesheading').hide();
 $('#GetCompletedRidesTable').hide();
 
+
+$('#sortingButton').on('click',function(){
+ 
+    GetCompletedRidesAdmin();
+    GetCanelledRidesAdmin();
+    GetPendingRidesAdmin();
+    GetAllRidesAdmin();
+
+});
+
 });
 
 //---------------------------Get All Completed Rides of a Particular user--------------------------------------
 
 $('#GetCompletedRides').on('click',function(){
-
+// location.reload();
   $('#GetCompletedRidesTable').show();
   $('#GetAllRidesTable').hide();
   $('#GetPendingTable').hide();
@@ -265,16 +292,21 @@ $('#GetCompletedRides').on('click',function(){
 
 function GetCompletedRidesAdmin() {
 
-
+var select1 = $('#select1').val();
+var select2 = $('#select2').val();
+$("th").css("display","none");
+$("td").css("display","none");
 
 $.ajax({
   url:'../Helper.php',
   type:'POST',
   data:{
+    'select1':select1,
+    'select2':select2,
     'action':'GetCompletedRidesAdmin',
   },
   success:function(res){
-
+    
     var data = JSON.parse(res);
     $('#TotalCompletedRides').html(data.length);
 
@@ -343,6 +375,7 @@ function getInfo(ride_id) {
 // ----------------------------------Get All User Details--------------------------------
 
 $('#GetAllUserDetails').on('click',function(){
+  // location.reload();
 
 $('#GetCancelledRidesTable').hide();
 $('#GetCompletedRidesTable').hide();
@@ -360,6 +393,8 @@ $('#usersheading').show();
 });
 
 function GetAllUser(){
+
+
   $.ajax({
     url:'../Helper.php',
     type:'POST',
@@ -392,7 +427,7 @@ function GetAllUser(){
 //-------------------------------Get Cancelled Rides Of a particular user--------------------------------------
 
 $('#GetCancelledRides').on('click',function(){
-
+  // location.reload();
 $('#GetCancelledRidesTable').show();
 $('#GetCompletedRidesTable').hide();
 $('#GetAllRidesTable').hide();
@@ -412,12 +447,19 @@ $('#usersheading').hide();
 
 function GetCanelledRidesAdmin(){
 
+  var select1 = $('#select1').val();
+var select2 = $('#select2').val();
+$("th").css("display","none");
+$("td").css("display","none");
+
 
 
 $.ajax({
   url:'../Helper.php',
   type:'POST',
   data:{
+    'select1':select1,
+    'select2':select2,
     'action':'GetCancelledRidesAdmin',
   },
   success:function(res){
@@ -447,7 +489,7 @@ $.ajax({
 //--------------------------Get all the pending Rides of a Particular user-------------------------------------
 
 $('#GetPendingRides').on('click',function(){
-
+  // location.reload();
   $('#GetCompletedRidesTable').hide();
   $('#GetAllRidesTable').hide();
   $('#GetPendingTable').show();
@@ -465,11 +507,18 @@ $('#GetPendingRides').on('click',function(){
 
 function GetPendingRidesAdmin() {
 
+  var select1 = $('#select1').val();
+var select2 = $('#select2').val();
+$("th").css("display","none");
+$("td").css("display","none");
+
 
 $.ajax({
     url:'../Helper.php',
     type:'POST',
     data:{
+      'select1':select1,
+      'select2':select2,
         'action':'GetPendingRidesAdmin',
     },
     success:function(res) {
@@ -494,7 +543,7 @@ $.ajax({
 //----------------------------------Get all The Details of Rides of a Particular user--------------------------
 
 $('#GetAllRides').on('click',function() {
-
+  // location.reload();
 $('#GetCompletedRidesTable').hide();
 $('#GetAllRidesTable').show();
 $('#GetPendingTable').hide();
@@ -514,11 +563,18 @@ $('#usersheading').hide();
 
 function GetAllRidesAdmin() {
 
+  var select1 = $('#select1').val();
+var select2 = $('#select2').val();
+$("th").css("display","none");
+$("td").css("display","none");
+
 
   $.ajax({
     url:'../Helper.php',
     type:'POST',
     data:{
+      'select1':select1,
+      'select2':select2,
       'action':'GetAllRidesAdmin',
     },
     success:function(res){
