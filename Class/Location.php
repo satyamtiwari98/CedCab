@@ -93,7 +93,8 @@ class Location extends Dbcon{
         $this->name = $name;
         $this->distance = $distance;
 
-        $sqlQuery = "insert into .`".self::table_location."` (`name`,`distance`,`is_availabe`) values('$this->name','$this->distance','1')";
+        $sqlQuery = "insert into .`".self::table_location."` (`name`,`distance`,`is_available`) values('$this->name','$this->distance','1')";
+        
 
         $result = $this->connect->query($sqlQuery);
 
@@ -145,7 +146,7 @@ class Location extends Dbcon{
     }
 
 
-    // ------------------------------------Get Location Information----------------------
+// ------------------------------------Get Location Information----------------------
 
 
     public function GetLocationInfo($id){
@@ -175,7 +176,7 @@ class Location extends Dbcon{
 
     }
 
-    // --------------------------------------Make It Available--------------------------
+// --------------------------------------Make It Available--------------------------
 
     public function MakeItAvailable($location_id){
 
@@ -208,7 +209,7 @@ class Location extends Dbcon{
     }
 
 
-    // -----------------------------Make It Un Available---------------------------------
+// -----------------------------Make It Un Available---------------------------------
 
 
     public function MakeItUnAvailable($location_id){
@@ -240,6 +241,103 @@ class Location extends Dbcon{
     }
 
     }
+
+
+// ---------------------------Delete Location------------------------------------------
+
+    public function DeleteLocation($location_id) {
+
+        try {
+
+        $this->location = $location_id;
+
+        $sqlQuery = "Delete from `".self::table_location."` where `id`='$this->location'";
+        // die($sqlQuery);
+
+        $result = $this->connect->query($sqlQuery);
+
+
+        if($result == True) {
+
+            return 1;
+
+        }else {
+
+            return 0;
+
+        }
+
+    } catch(Exception $e) {
+
+        return $e;
+
+    }
+}
+
+// -----------------------------Edit Location Information------------------------------
+
+public function EditLocationInfo($id){
+
+    try {
+
+    $this->location = $id;
+
+    $sqlQuery = "select * from `".self::table_location."` where `id`='$this->location'";
+
+    $result = $this->connect->query($sqlQuery);
+
+    if($result->num_rows>0) {
+        $i=0;
+        while($row = $result->fetch_assoc()) {
+            $this->data[$i] = $row;
+            ++$i;
+          }
+        
+    }
+
+    return $this->data;
+
+} catch(Exception $e) {
+
+    return $e;
+
+}
+
+}
+
+
+// --------------------------------Update Location--------------------------------------
+
+public function UpdateLocation($name, $distance,$is_available,$id){
+
+    try{
+
+    $this->name = $name;
+    $this->distance = $distance;
+    $this->is_available = $is_available;
+    $this->location = $id;
+
+    $sqlQuery = "update `".self::table_location."` set `name`='$this->name',`distance`='$this->distance',`is_available`='$this->is_available' where `id`='$this->location'";
+
+        $result = $this->connect->query($sqlQuery);
+
+
+        if($result == true) {
+
+            return 1;
+
+        }else {
+
+            return 0;
+
+        }
+    } catch(Exception $e) {
+
+        return $e;
+    
+    }
+
+}
 
 
 

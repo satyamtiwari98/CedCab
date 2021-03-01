@@ -31,6 +31,11 @@
 
   
 </form>
+
+
+<!-- ---------------------------------Location Table-------------------------------- -->
+
+
 <h1 id="tableheading"></h1>
 <table class="table table-success table-striped" id="locationTable">
 <thead>
@@ -43,6 +48,8 @@
 
 
 </div>
+
+<!-- ------------------------My Location Info Modal-------------------------------- -->
 
 <div class="modal" id="mylocationinfo" tabindex="-1">
   <div class="modal-dialog">
@@ -62,6 +69,8 @@
   </div>
 </div>
 
+
+
 <?php
     include_once 'assets/template/footer.php';
 ?>
@@ -70,6 +79,8 @@
 <script>
 
     $(document).ready(function(){
+
+      $('#EditLocation').hide();
 
         GetAllLocation();
 
@@ -97,7 +108,6 @@
                     if(res==1) {
 
                         alert("Location Added SuccessFully");
-                        // $(window).attr("location","index.php");
                         location.reload();
                         
                     }else {
@@ -143,7 +153,7 @@ $.ajax({
 
 }
 
-
+// --------------------------------Get All Location------------------------------------
 
 function GetAllLocation() {
 
@@ -155,20 +165,21 @@ function GetAllLocation() {
     },
     success:function(res){
       var data = JSON.parse(res);
-    // $('#AllUsers').html(data.length);
+      var id;
     $('#tableheading').append('All Locations Available :-');
 
-    $('#locationTable thead').append(' <tr><th scope="col">Location Id</th><th scope="col">Name</th><th scope="col">Distance</th><th scope="col">Is Available</th><th scope="col">Action</th><th scope="col">View Details</th></tr>');
+    $('#locationTable thead').append(' <tr><th scope="col">Location Id</th><th scope="col">Name</th><th scope="col">Distance</th><th scope="col">Is Available</th><th scope="col">Action</th><th scope="col">Edit</th><th scope="col">Delete Location</th><th scope="col">View Details</th></tr>');
     
     for(var i = 0; i<data.length;i++) {
+      id = data[i]['id'];
 
       if(data[i]['is_available']=='1'){
 
-      $('#locationTable tbody').append('<tr><td>'+data[i]['id']+'</td><td>'+data[i]['name']+'</td><td>'+data[i]['distance']+'</td><td>Available</td><td><button class="btn btn-outline-danger" onclick="makeitunavailable('+data[i]['id']+')">NotAvailable</button></td><td><button class="btn btn-outline-info" onclick="getlocationinfo('+data[i]['id']+')">view</button></td></tr>');
+      $('#locationTable tbody').append('<tr><td>'+data[i]['id']+'</td><td>'+data[i]['name']+'</td><td>'+data[i]['distance']+'</td><td>Available</td><td><button class="btn btn-outline-danger" onclick="makeitunavailable('+data[i]['id']+')">NotAvailable</button></td><td><a href="editlocation.php?id='+id+'" class="btn btn-success">Edit</a></td><td><button class="btn btn-danger" onclick="deletelocation('+data[i]['id']+')">Delete</button></td><td><button class="btn btn-outline-info" onclick="getlocationinfo('+data[i]['id']+')">view</button></td></tr>');
 
       }else if(data[i]['is_available']=='0'){
 
-        $('#locationTable tbody').append('<tr><td>'+data[i]['id']+'</td><td>'+data[i]['name']+'</td><td>'+data[i]['distance']+'</td><td>Not Available</td><td><button class="btn btn-outline-danger" onclick="makeitavailable('+data[i]['id']+')">Available</button></td><td><button class="btn btn-outline-info" onclick="getlocationinfo('+data[i]['id']+')">view</button></td></tr>');
+        $('#locationTable tbody').append('<tr><td>'+data[i]['id']+'</td><td>'+data[i]['name']+'</td><td>'+data[i]['distance']+'</td><td>Not Available</td><td><button class="btn btn-outline-danger" onclick="makeitavailable('+data[i]['id']+')">Available</button></td><td><a href="editlocation.php?id='+id+'" class="btn btn-success">Edit</a></td><td><button class="btn btn-danger" onclick="deletelocation('+data[i]['id']+')">Delete</button></td><td><button class="btn btn-outline-info" onclick="getlocationinfo('+data[i]['id']+')">view</button></td></tr>');
 
       }
 
@@ -177,6 +188,7 @@ function GetAllLocation() {
   });
 }
 
+// ------------------------------Make it Available------------------------------------
 
 function makeitavailable(id){
 
@@ -207,6 +219,8 @@ location.reload();
 }
 
 
+// --------------------------------Make It Unavailable----------------------------------
+
 function makeitunavailable(id){
 
 var location_id = id;
@@ -235,6 +249,7 @@ location.reload();
 
 }
 
+// ------------------------------Get Location Information--------------------------------
 
 function getlocationinfo(id){
     var location_id = id;
@@ -269,8 +284,39 @@ function getlocationinfo(id){
 
         
         }
-    })
+    });
 }
+
+// ----------------------------------Delete Location-------------------------------------
+
+function deletelocation(id){
+  var location_id = id;
+
+  $.ajax({
+    url:'../Helper.php',
+    type:'POST',
+    data:{
+      'location_id':location_id,
+      'action':'DeleteLocation',
+    },
+    success:function(res){
+      console.log(res);
+
+      if(res == 1){
+        alert('Location Deleted successfully!!!!');
+        location.reload();
+      }else{
+        alert('Location Can Not be Deleted!!!!');
+        location.reload();
+      }
+
+    }
+  });
+
+}
+
+
+
 
 
 

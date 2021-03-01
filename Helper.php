@@ -138,7 +138,7 @@ if(isset($_POST['action'])) {
 
             if (file_exists($target_file)) {
 
-                $uploadOk = 0;
+                $uploadOk = 1;
 
             }
 
@@ -398,6 +398,17 @@ if(isset($_POST['action'])) {
 
             break;
 
+// ---------------------------Delete Location--------------------------------------------
+
+        case 'DeleteLocation':
+            $location_id = $_POST['location_id'];
+
+            $locationObject = new Location();
+            $result = $locationObject->DeleteLocation($location_id);
+
+            echo $result;
+            break;
+
 // ---------------------------------Approve Rides---------------------------------------
 
         case 'ApproveRide':
@@ -518,6 +529,32 @@ if(isset($_POST['action'])) {
 
             echo json_encode($result);
 
+            break;
+
+// -----------------------Edit Location Information-------------------------------------
+
+        case 'EditLocationInfo':
+                $id = $_POST['id'];
+    
+                $locationObject = new Location();
+                $result = $locationObject->EditLocationInfo($id);
+    
+                echo json_encode($result);
+    
+                break;
+
+// ---------------------------Update Location-------------------------------------------
+
+        case 'UpdateLocation':
+            $name = $_POST['name'];
+            $distance = $_POST['distance'];
+            $is_available = $_POST['is_available'];
+            $id = $_POST['id'];
+
+            $locationObject = new Location();
+            $result = $locationObject->UpdateLocation($name,$distance,$is_available,$id);
+
+            echo $result;
             break;
 
 // ------------------------------Make It Available--------------------------------------
