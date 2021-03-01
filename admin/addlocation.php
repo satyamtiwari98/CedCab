@@ -31,7 +31,7 @@
 
   
 </form>
-
+<h1 id="tableheading"></h1>
 <table class="table table-success table-striped" id="locationTable">
 <thead>
   </thead>
@@ -156,6 +156,7 @@ function GetAllLocation() {
     success:function(res){
       var data = JSON.parse(res);
     // $('#AllUsers').html(data.length);
+    $('#tableheading').append('All Locations Available :-');
 
     $('#locationTable thead').append(' <tr><th scope="col">Location Id</th><th scope="col">Name</th><th scope="col">Distance</th><th scope="col">Is Available</th><th scope="col">Action</th><th scope="col">View Details</th></tr>');
     

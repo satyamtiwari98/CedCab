@@ -70,7 +70,7 @@
 
 
 <!----------------------------Get Pending Rides Table--------------------------------------------------------->
-
+<h1 id="pendingridesheading">All Pending Rides Available :-</h1>
 <table class="table table-success table-striped" id="GetPendingTable">
 <thead>
   </thead>
@@ -80,7 +80,7 @@
 
 
 <!--------------------------------------Get all Rides Table---------------------------------------------->
-
+<h1 id="allridesheading">All Rides Done By You :-</h1>
 <table class="table table-success table-striped" id="GetAllRidesTable">
 <thead>
   </thead>
@@ -88,7 +88,7 @@
   </tbody>
 </table>
 <!----------------------------------Get Cancelled Rides Table-------------------------------------------- -->
-
+<h1 id="cancelledridesheading">All Cancelled Rides :-</h1>
 <table class="table table-success table-striped" id="GetCancelledRidesTable">
 <thead>
   </thead>
@@ -100,7 +100,7 @@
 
 
 <!-----------------------Get Completed Rides Table-------------->
-
+<h1 id="completedridesheading">All Completed Rides By You :-</h1>
 <table class="table table-success table-striped" id="GetCompletedRidesTable">
 <thead>
   </thead>
@@ -269,16 +269,19 @@ GetPendingRides();
 
 GetAllRides();
 $('#GetAllRidesTable').hide();
+$('#allridesheading').hide();
 
 // ----------------------------------------------------------------------------------------------------------
 
 GetCanelledRides();
 $('#GetCancelledRidesTable').hide();
+$('#cancelledridesheading').hide();
 
 //--------------------------------------------------------------------------------------------------------------
 
 GetCompletedRides();
 $('#GetCompletedRidesTable').hide();
+$('#completedridesheading').hide();
 
 });
 
@@ -290,6 +293,12 @@ $('#GetCompletedRides').on('click',function(){
   $('#GetAllRidesTable').hide();
   $('#GetPendingTable').hide();
   $('#GetCancelledRidesTable').hide();
+
+  $('#completedridesheading').show();
+  $('#pendingridesheading').hide();
+  $('#allridesheading').hide();
+  $('#cancelledridesheading').hide();
+  $('#usersheading').hide();
 
 });
 
@@ -381,6 +390,12 @@ $('#GetCompletedRidesTable').hide();
 $('#GetAllRidesTable').hide();
 $('#GetPendingTable').hide();
 
+$('#completedridesheading').hide();
+$('#pendingridesheading').hide();
+$('#allridesheading').hide();
+$('#cancelledridesheading').show();
+$('#usersheading').hide();
+
 
 });
 
@@ -427,6 +442,12 @@ $('#GetPendingRides').on('click',function(){
   $('#GetPendingTable').show();
   $('#GetCancelledRidesTable').hide();
 
+  $('#completedridesheading').hide();
+  $('#pendingridesheading').show();
+  $('#allridesheading').hide();
+  $('#cancelledridesheading').hide();
+  $('#usersheading').hide();
+
 });
 
 function GetPendingRides() {
@@ -466,6 +487,13 @@ $('#GetCompletedRidesTable').hide();
 $('#GetAllRidesTable').show();
 $('#GetPendingTable').hide();
 $('#GetCancelledRidesTable').hide();
+
+$('#completedridesheading').hide();
+$('#pendingridesheading').hide();
+$('#allridesheading').show();
+$('#cancelledridesheading').hide();
+$('#usersheading').hide();
+
 
 });
 
