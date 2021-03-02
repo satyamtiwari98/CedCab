@@ -396,7 +396,7 @@ function getInfo(ride_id) {
         $('#myinfo').modal('show');
 
 
-      }else if(data[0]['status']==1) {
+      }else if(data[0]['status'] == 1) {
 
         $('.modal-body-info').html("<p>Ride Id : <b style='color:brown'>"+data[0]['ride_id']+"</b></p><p>Ride Date : <b style='color:brown'>"+data[0]['ride_date']+"</b></p><p>PickUp Point : <b style='color:brown'>"+data[0]['from']+"</b></p><p>Drop Point : <b style='color:brown'>"+data[0]['to']+"</b></p><p>CabType : <b style='color:brown'>"+data[0]['cab_type']+"</b></p><p>TotalDistance : <b style='color:brown'>"+data[0]['total_distance']+"km</b></p><p>Luggage weight : <b style='color:brown'>"+data[0]['luggage']+" kg</b></p><p>Total Fare : <b style='color:brown'>Rs."+data[0]['total_fare']+"</b><p>Ride Status : <b style='color:brown'>Pending</b></p>");
             
@@ -436,37 +436,37 @@ $('#usersheading').hide();
 });
 
 
-function GetCanelledRides(){
+function GetCanelledRides() {
 
   var select1 = $('#select1').val();
-var select2 = $('#select2').val();
-$("th").css("display","none");
-$("td").css("display","none");
+  var select2 = $('#select2').val();
+  $("th").css("display","none");
+  $("td").css("display","none");
 
 
-var user_id = <?php echo $_SESSION['user']['user_id'];?>;
+  var user_id = <?php echo $_SESSION['user']['user_id'];?>;
 
-$.ajax({
-  url:'../Helper.php',
-  type:'POST',
-  data:{
-    'select1':select1,
-    'select2':select2,
-    'user_id':user_id,
-    'action':'GetCancelledRides',
-  },
-  success:function(res){
+  $.ajax({
+    url:'../Helper.php',
+    type:'POST',
+    data:{
+      'select1':select1,
+      'select2':select2,
+      'user_id':user_id,
+      'action':'GetCancelledRides',
+    },
+    success:function(res){
 
-    var data = JSON.parse(res);
-    $('#TotalCancelledRides').html(data.length);
+      var data = JSON.parse(res);
+      $('#TotalCancelledRides').html(data.length);
 
-    $('#GetCancelledRidesTable thead').append(' <tr><th scope="col">Ride_Id</th><th scope="col">Ride_Date</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Cab_Type</th><th scope="col">Total_Distance</th><th scope="col">luggage</th><th scope="col">Total_Fare</th><th scope="col">View Details</th></tr>');
+      $('#GetCancelledRidesTable thead').append(' <tr><th scope="col">Ride_Id</th><th scope="col">Ride_Date</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Cab_Type</th><th scope="col">Total_Distance</th><th scope="col">luggage</th><th scope="col">Total_Fare</th><th scope="col">View Details</th></tr>');
     
-    for(var i = 0; i<data.length;i++) {
+      for(var i = 0; i<data.length;i++) {
 
-      $('#GetCancelledRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">view</button></td></tr>');
+        $('#GetCancelledRidesTable tbody').append('<tr><td>'+data[i]['ride_id']+'</td><td>'+data[i]['ride_date']+'</td><td>'+data[i]['from']+'</td><td>'+data[i]['to']+'</td><td>'+data[i]['cab_type']+'</td><td>'+data[i]['total_distance']+'</td><td>'+data[i]['luggage']+'</td><td>'+data[i]['total_fare']+'</td><td><button class="btn btn-outline-info" onclick="getInfo('+data[i]['ride_id']+')">view</button></td></tr>');
 
-    }
+      }
     
   }
 
