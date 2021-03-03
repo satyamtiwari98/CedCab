@@ -1027,7 +1027,7 @@ class Ride extends Dbcon {
 
             $this->ride_id = $ride_id;
 
-            $sqlQuery = "SELECT `tbl_ride`.*,`tbl_user`.`name`,`tbl_user`.`email_id`,`tbl_user`.`name`,`tbl_user`.`dateofsignup`,`tbl_user`.`mobile`,`tbl_user`.`is_admin` FROM `tbl_ride` LEFT JOIN `tbl_user` ON `tbl_ride`.`customer_user_id` = `tbl_user`.`user_id` where `tbl_ride`.`ride_id`='$this->ride_id'";
+            $sqlQuery = "SELECT `tbl_ride`.*,`tbl_user`.`name`,`tbl_user`.`user_id`,`tbl_user`.`email_id`,`tbl_user`.`name`,`tbl_user`.`dateofsignup`,`tbl_user`.`mobile`,`tbl_user`.`is_admin` FROM `tbl_ride` LEFT JOIN `tbl_user` ON `tbl_ride`.`customer_user_id` = `tbl_user`.`user_id` where `tbl_ride`.`ride_id`='$this->ride_id'";
 
             $result = $this->connect->query($sqlQuery);
 
