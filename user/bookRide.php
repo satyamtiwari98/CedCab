@@ -194,7 +194,7 @@ $("#subId").click(function (e) {
 
                         alert("Ride Booked SuccessFully!!!!");
                         $('#my').modal('hide');
-                        // location.reload();
+                    
                         $(window).attr("location","index.php");
 
             

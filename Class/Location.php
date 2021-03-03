@@ -26,30 +26,30 @@ class Location extends Dbcon{
 
         try {
        
-        $sqlQuery = "Select * from `".self::table_location."` where `is_available`='1'";
+            $sqlQuery = "Select * from `".self::table_location."` where `is_available`='1'";
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
+            if($result->num_rows>0) {
 
-            $i=0;
+                $i=0;
 
-            while($row = $result->fetch_assoc()) {
+                while($row = $result->fetch_assoc()) {
             
-              $this->arr[$i]=$row;
-              ++$i;
+                $this->arr[$i]=$row;
+                ++$i;
+
+                }
 
             }
 
+            return $this->arr;
+
+        } catch(Exception $e) {
+
+            return $e;
+
         }
-
-        return $this->arr;
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
     }
 
@@ -61,27 +61,27 @@ class Location extends Dbcon{
 
         try {
 
-        $this->distance = $distance;
+            $this->distance = $distance;
 
-        $sqlQuery = "select `name` from `".self::table_location."` where `distance`='$this->distance'";
+            $sqlQuery = "select `name` from `".self::table_location."` where `distance`='$this->distance'";
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
+            if($result->num_rows>0) {
             
-            return $result->fetch_assoc();
+                return $result->fetch_assoc();
             
-        }else {
+            }else {
 
-            return "Not Found!!!";
+                return "Not Found!!!";
+
+            }
+
+        } catch(Exception $e) {
+
+            return $e;
 
         }
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
     }
 
@@ -90,29 +90,29 @@ class Location extends Dbcon{
     public function AddLocation($name,$distance){
         try {
 
-        $this->name = $name;
-        $this->distance = $distance;
+            $this->name = $name;
+            $this->distance = $distance;
 
-        $sqlQuery = "insert into .`".self::table_location."` (`name`,`distance`,`is_available`) values('$this->name','$this->distance','1')";
+            $sqlQuery = "insert into .`".self::table_location."` (`name`,`distance`,`is_available`) values('$this->name','$this->distance','1')";
         
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result == True) {
+            if($result == True) {
 
-            return 1;
+                return 1;
 
-        }else {
+            }else {
 
-            return 0;
+                return 0;
+
+            }
+
+        } catch(Exception $e) {
+
+            return $e;
 
         }
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
     }
 
@@ -123,38 +123,175 @@ class Location extends Dbcon{
 
         try {
 
-        $sqlQuery = "Select * from `".self::table_location."`";
+            $sqlQuery = "Select * from `".self::table_location."`";
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
+            if($result->num_rows>0) {
 
-            $i=0;
+                $i=0;
 
-            while($row = $result->fetch_assoc()) {
+                while($row = $result->fetch_assoc()) {
 
-                $this->data[$i] = $row;
-                ++$i;
-                
-              }
+                    $this->data[$i] = $row;
+                    ++$i;
+
+                }
             
+            }
+
+            return $this->data;
+
+        } catch(Exception $e) {
+
+            return $e;
+
         }
 
-        return $this->data;
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
     }
 
 
 // ------------------------------------Get Location Information----------------------
 
 
-    public function GetLocationInfo($id){
+    public function GetLocationInfo($id) {
+
         try {
+
+            $this->location = $id;
+
+            $sqlQuery = "select * from `".self::table_location."` where `id`='$this->location'";
+
+            $result = $this->connect->query($sqlQuery);
+
+            if($result->num_rows>0) {
+
+                $i=0;
+
+                while($row = $result->fetch_assoc()) {
+
+                    $this->data[$i] = $row;
+                    ++$i;
+
+                }
+            
+            }
+
+            return $this->data;
+
+        } catch(Exception $e) {
+
+            return $e;
+
+        }
+
+    }
+
+// --------------------------------------Make It Available--------------------------
+
+    public function MakeItAvailable($location_id) {
+
+        try {
+
+            $this->location = $location_id;
+
+
+            $sqlQuery = "update `".self::table_location."` set `is_available`='1' where `id`='$this->location'";
+
+            $result = $this->connect->query($sqlQuery);
+
+
+            if($result == true) {
+
+                return 1;
+
+            }else {
+
+                return 0;
+
+            }
+
+        } catch(Exception $e) {
+
+            return $e;
+
+        }
+
+    }
+
+
+// -----------------------------Make It Un Available---------------------------------
+
+
+    public function MakeItUnAvailable($location_id){
+
+        try{
+
+            $this->location = $location_id;
+
+
+            $sqlQuery = "update `".self::table_location."` set `is_available`='0' where `id`='$this->location'";
+
+            $result = $this->connect->query($sqlQuery);
+
+
+            if($result == true) {
+
+                return 1;
+
+            }else {
+
+                return 0;
+
+            }
+
+        } catch(Exception $e) {
+
+            return $e;
+
+        }
+
+    }
+
+
+// ---------------------------Delete Location------------------------------------------
+
+    public function DeleteLocation($location_id) {
+
+        try {
+
+            $this->location = $location_id;
+
+            $sqlQuery = "Delete from `".self::table_location."` where `id`='$this->location'";
+        
+
+            $result = $this->connect->query($sqlQuery);
+
+
+            if($result == True) {
+
+                return 1;
+
+            }else {
+
+                return 0;
+
+            }
+
+        } catch(Exception $e) {
+
+            return $e;
+
+        }
+
+}
+
+// -----------------------------Edit Location Information------------------------------
+
+public function EditLocationInfo($id){
+
+    try {
+
         $this->location = $id;
 
         $sqlQuery = "select * from `".self::table_location."` where `id`='$this->location'";
@@ -170,8 +307,8 @@ class Location extends Dbcon{
                 $this->data[$i] = $row;
                 ++$i;
 
-              }
-            
+            }
+        
         }
 
         return $this->data;
@@ -182,150 +319,21 @@ class Location extends Dbcon{
 
     }
 
-    }
-
-// --------------------------------------Make It Available--------------------------
-
-    public function MakeItAvailable($location_id){
-
-        try{
-
-        $this->location = $location_id;
-
-
-        $sqlQuery = "update `".self::table_location."` set `is_available`='1' where `id`='$this->location'";
-
-        $result = $this->connect->query($sqlQuery);
-
-
-        if($result == true) {
-
-            return 1;
-
-        }else {
-
-            return 0;
-
-        }
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
-
-    }
-
-
-// -----------------------------Make It Un Available---------------------------------
-
-
-    public function MakeItUnAvailable($location_id){
-
-        try{
-
-        $this->location = $location_id;
-
-
-        $sqlQuery = "update `".self::table_location."` set `is_available`='0' where `id`='$this->location'";
-
-        $result = $this->connect->query($sqlQuery);
-
-
-        if($result == true) {
-
-            return 1;
-
-        }else {
-
-            return 0;
-
-        }
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
-
-    }
-
-
-// ---------------------------Delete Location------------------------------------------
-
-    public function DeleteLocation($location_id) {
-
-        try {
-
-        $this->location = $location_id;
-
-        $sqlQuery = "Delete from `".self::table_location."` where `id`='$this->location'";
-        
-
-        $result = $this->connect->query($sqlQuery);
-
-
-        if($result == True) {
-
-            return 1;
-
-        }else {
-
-            return 0;
-
-        }
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
-}
-
-// -----------------------------Edit Location Information------------------------------
-
-public function EditLocationInfo($id){
-
-    try {
-
-    $this->location = $id;
-
-    $sqlQuery = "select * from `".self::table_location."` where `id`='$this->location'";
-
-    $result = $this->connect->query($sqlQuery);
-
-    if($result->num_rows>0) {
-        $i=0;
-        while($row = $result->fetch_assoc()) {
-            $this->data[$i] = $row;
-            ++$i;
-          }
-        
-    }
-
-    return $this->data;
-
-} catch(Exception $e) {
-
-    return $e;
-
-}
-
 }
 
 
 // --------------------------------Update Location--------------------------------------
 
-public function UpdateLocation($name, $distance,$is_available,$id){
+public function UpdateLocation($name, $distance,$is_available,$id) {
 
-    try{
+    try {
 
-    $this->name = $name;
-    $this->distance = $distance;
-    $this->is_available = $is_available;
-    $this->location = $id;
+        $this->name = $name;
+        $this->distance = $distance;
+        $this->is_available = $is_available;
+        $this->location = $id;
 
-    $sqlQuery = "update `".self::table_location."` set `name`='$this->name',`distance`='$this->distance',`is_available`='$this->is_available' where `id`='$this->location'";
+        $sqlQuery = "update `".self::table_location."` set `name`='$this->name',`distance`='$this->distance',`is_available`='$this->is_available' where `id`='$this->location'";
 
         $result = $this->connect->query($sqlQuery);
 

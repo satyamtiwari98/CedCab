@@ -1,5 +1,6 @@
 <?php
 // ---------------------------------------DataBase Connection Class------------------------
+
 class Dbcon {
 
     private $ServerName="localhost"; // Your Host Name

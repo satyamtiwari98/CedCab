@@ -55,11 +55,13 @@ $(document).ready(function () {
           },
 
           success: function (res) {
+
               var arr = JSON.parse(res);
           
             $('.modal-body').html("<p>PickUp Point : <b style='color:brown'>"+arr[0]+"</b></p><p>Drop Point : <b style='color:brown'>"+arr[1]+"</b></p><p>CabType : <b style='color:brown'>"+arr[2]+"</b></p><p>TotalDistance : <b style='color:brown'>"+arr[3]+" km</b></p><p>Luggage weight : <b style='color:brown'>"+arr[4]+" kg</b></p><p>Total Fare : <b style='color:brown'>Rs."+arr[5]+"</b></p>");
 
             $('#my').modal('show');
+            
 
               }
               
@@ -82,7 +84,8 @@ $(document).ready(function () {
 
 //---------------------------------------This is to get the options in the dropdown-----------------------
 
-function letsGetOptions(){
+function letsGetOptions() {
+
     var select1 = $('#pickUp');
     var select2 = $('#drop');
 
@@ -92,14 +95,16 @@ function letsGetOptions(){
         data:{
             'action':'letsGetOption'
         },
-        success:function(res){
+        success:function(res) {
         
             var location = JSON.parse(res);
 
-            for(var i =0;i<location.length;i++){
+            for(var i =0;i<location.length;i++) {
+
                 let option = "<option value="+location[i]['distance']+">"+location[i]['name']+"</option>";
                 select1.append(option);
                 select2.append(option);
+
             }
         }
     });
@@ -133,15 +138,20 @@ $('#BookRide').click(function(){
         data:{
             'action':'redirectBookRide',
         },
-        success:function(res){
+        success:function(res) {
+
             if(res==1) {
+
                 $(window).attr("location","user/index.php");
                
-            }else{
+            }else {
+
                 alert("Please login To book Ride");
                 $(window).attr("location","login.php");
+
             }
         }
-    })
-})
+    });
+
+});
 

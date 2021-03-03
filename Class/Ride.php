@@ -49,7 +49,9 @@ class Ride extends Dbcon {
         $this->cabType = $cabType;
         $this->luggage = $luggage;
         $this->totalDistance = $totalDistance;
-        $time = time();
+        $time = time(); // This is to get the current time
+
+        // here we are storing the ride details enter by user in session to access it later on.
 
         $_SESSION['ride']['pickup']=$this->distance1;
         $_SESSION['ride']['drop']=$this->distance2;
@@ -466,95 +468,100 @@ class Ride extends Dbcon {
     }
 
 
-    // -----------------------------Book Ride Function---------------------------------------------------------
+    // -----------------------------Book Ride Function--------------------------------------------------------
 
 
     public function BookRide($pickup,$drop,$cab,$luggage,$fare,$total,$id) {
 
         try {
 
-        $this->pickupPoint = $pickup;
-        $this->dropPoint = $drop;
-        $this->cabType = $cab;
-        $this->luggage = $luggage;
-        $this->totalDistance = $total;
-        $this->TotalFare = $fare;
-        $this->user_id = $id;
+            $this->pickupPoint = $pickup;
+            $this->dropPoint = $drop;
+            $this->cabType = $cab;
+            $this->luggage = $luggage;
+            $this->totalDistance = $total;
+            $this->TotalFare = $fare;
+            $this->user_id = $id;
 
-        $sqlQuery = "insert into `".self::table_ride."` (`ride_date`,`from`,`to`,`cab_type`,`total_distance`,`luggage`,`total_fare`,`status`,`customer_user_id`) values (now(),'$this->pickupPoint','$this->dropPoint','$this->cabType','$this->totalDistance','$this->luggage','$this->TotalFare','1','$this->user_id')";
+            // This is sql query to insert ride details into tbl_ride to  book a ride for the user
+
+            $sqlQuery = "insert into `".self::table_ride."` (`ride_date`,`from`,`to`,`cab_type`,`total_distance`,`luggage`,`total_fare`,`status`,`customer_user_id`) values (now(),'$this->pickupPoint','$this->dropPoint','$this->cabType','$this->totalDistance','$this->luggage','$this->TotalFare','1','$this->user_id')";
         
 
         
-        if ($this->connect->query($sqlQuery) == TRUE) {
+            if ($this->connect->query($sqlQuery) == TRUE) {
 
-            if(isset($_SESSION['ride']['pickup'])){
-                unset($_SESSION['ride']['pickup']);
-                unset($_SESSION['ride']['drop']);
-                unset($_SESSION['ride']['cabtype']);
-                unset($_SESSION['ride']['fare']);
-                unset($_SESSION['ride']['luggage']);
-                unset($_SESSION['ride']['totaldistance']);
+                // if session is set then we are making it unset and then store that data in our database
+
+                if(isset($_SESSION['ride']['pickup'])){
+                    unset($_SESSION['ride']['pickup']);
+                    unset($_SESSION['ride']['drop']);
+                    unset($_SESSION['ride']['cabtype']);
+                    unset($_SESSION['ride']['fare']);
+                    unset($_SESSION['ride']['luggage']);
+                    unset($_SESSION['ride']['totaldistance']);
+
+                }
+
+                return 1;
+
+            } else {
+
+            return 0;
 
             }
 
-            return 1;
+            } catch(Exception $e) {
 
-          } else {
+                return $e;
+    
+            }
 
-         return 0;
+    }
 
-          }
+    // ----------------------------------Get Pending Rides----------------------------------------------------
+
+    public function GetPendingRides($user_id,$select1,$select2) {
+
+        try {
+
+            $this->user_id = $user_id;
+            $this->select1 = $select1;
+            $this->select2 = $select2;
+
+            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+
+
+                $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='1' order by $this->select2 $this->select1";
+
+            }else{
+
+            $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='1'";
+
+            }
+
+            $result = $this->connect->query($sqlQuery);
+
+            if($result->num_rows>0) {
+
+                $i=0;
+
+                while($row = $result->fetch_assoc()) {
+
+                    $this->data[$i] = $row;
+                    ++$i;
+
+                }
+            
+            }
+
+            return $this->data;
 
         } catch(Exception $e) {
 
             return $e;
-    
+
         }
-
-    }
-
-    // ----------------------------------Get Pending Rides-----------------------------------------------------
-
-    public function GetPendingRides($user_id,$select1,$select2) {
-
-        try{
-
-        $this->user_id = $user_id;
-        $this->select1 = $select1;
-        $this->select2 = $select2;
-
-        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
-
-            $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='1' order by $this->select2 $this->select1";
-
-        }else{
-
-        $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='1'";
-        
-        }
-
-        $result = $this->connect->query($sqlQuery);
-
-        if($result->num_rows>0) {
-
-            $i=0;
-
-            while($row = $result->fetch_assoc()) {
-
-                $this->data[$i] = $row;
-                ++$i;
-
-              }
-            
-        }
-
-        return $this->data;
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
 
     }
@@ -564,7 +571,8 @@ class Ride extends Dbcon {
 
     public function GetPendingRidesAdmin($select1,$select2) {
 
-        try{
+        try {
+
             $this->select1 = $select1;
             $this->select2 = $select2;
 
@@ -581,28 +589,28 @@ class Ride extends Dbcon {
 
         
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
+            if($result->num_rows>0) {
 
-            $i=0;
+                $i=0;
 
-            while($row = $result->fetch_assoc()) {
+                while($row = $result->fetch_assoc()) {
 
-                $this->data[$i] = $row;
-                ++$i;
+                    $this->data[$i] = $row;
+                    ++$i;
 
-              }
+                }
             
+            }
+
+            return $this->data;
+
+        } catch(Exception $e) {
+
+            return $e;
+
         }
-
-        return $this->data;
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
 
     }
@@ -614,43 +622,43 @@ class Ride extends Dbcon {
 
         try {
 
-        $this->user_id = $user_id;
-        $this->select1 = $select1;
-        $this->select2 = $select2;
+            $this->user_id = $user_id;
+            $this->select1 = $select1;
+            $this->select2 = $select2;
 
-        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
 
-            $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' order by $this->select2 $this->select1";
+                $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' order by $this->select2 $this->select1";
 
-        }else {
+            }else {
 
-            $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id'";
+                $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id'";
 
-        }
+            }
 
         
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
+            if($result->num_rows>0) {
 
-            $i=0;
+                $i=0;
 
-            while($row = $result->fetch_assoc()) {
+                while($row = $result->fetch_assoc()) {
 
-                $this->data[$i] = $row;
-                ++$i;
+                    $this->data[$i] = $row;
+                    ++$i;
 
-              }
+                }
             
+            }
+
+            return $this->data;
+
+        } catch(Exception $e) {
+
+            return $e;
+
         }
-
-        return $this->data;
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
     }
 
@@ -659,6 +667,7 @@ class Ride extends Dbcon {
     public function GetAllRidesAdmin($select1,$select2) {
 
         try {
+
             $this->select1 = $select1;
             $this->select2 = $select2;
 
@@ -673,76 +682,76 @@ class Ride extends Dbcon {
             }
 
         
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
+            if($result->num_rows>0) {
 
-            $i=0;
+                $i=0;
 
-            while($row = $result->fetch_assoc()) {
+                while($row = $result->fetch_assoc()) {
 
-                $this->data[$i] = $row;
-                ++$i;
+                    $this->data[$i] = $row;
+                    ++$i;
 
-              }
+                }
             
+            }
+
+            return $this->data;
+
+        } catch(Exception $e) {
+
+            return $e;
+
         }
 
-        return $this->data;
-
-    } catch(Exception $e) {
-
-        return $e;
-
     }
 
-    }
-
-// ----------------------------Get Completed Rides-------------------------------------------------------------
+// ----------------------------Get Completed Rides------------------------------------------------------------
 
 
     public function GetCompletedRides($user_id,$select1,$select2) {
 
         try {
 
-        $this->user_id = $user_id;
-        $this->select1 = $select1;
-        $this->select2 = $select2;
+            $this->user_id = $user_id;
+            $this->select1 = $select1;
+            $this->select2 = $select2;
 
-        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
 
-            $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='2' order by $this->select2 $this->select1";
+                $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='2' order by $this->select2 $this->select1";
 
-        }else {
+            }else {
 
-            $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='2'";
+                $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='2'";
 
-        }
+            }
 
         
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
+            if($result->num_rows>0) {
 
-            $i=0;
+                $i=0;
 
-            while($row = $result->fetch_assoc()) {
+                while($row = $result->fetch_assoc()) {
 
-                $this->data[$i] = $row;
-                ++$i;
+                    $this->data[$i] = $row;
+                    ++$i;
 
-              }
+                }
             
+            }
+
+            return $this->data;
+
+        } catch(Exception $e) {
+
+            return $e;
+
         }
-
-        return $this->data;
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
     }
 
@@ -769,28 +778,28 @@ class Ride extends Dbcon {
 
       
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
+            if($result->num_rows>0) {
 
-            $i=0;
+                $i=0;
 
-            while($row = $result->fetch_assoc()) {
+                while($row = $result->fetch_assoc()) {
 
-                $this->data[$i] = $row;
-                ++$i;
+                    $this->data[$i] = $row;
+                    ++$i;
 
-              }
+                }
             
+            }
+
+            return $this->data;
+
+        } catch(Exception $e) {
+
+            return $e;
+
         }
-
-        return $this->data;
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
     }
 
@@ -802,43 +811,43 @@ class Ride extends Dbcon {
 
         try {
 
-        $this->user_id = $user_id;
-        $this->select1 = $select1;
-        $this->select2 = $select2;
+            $this->user_id = $user_id;
+            $this->select1 = $select1;
+            $this->select2 = $select2;
 
-        if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
+            if(($this->select1 == 'ASC'||$this->select1 == 'DESC' )&& ($this->select2 == 'ride_date' || $this->select2=='total_fare')) {
 
-            $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='0' order by $this->select2 $this->select1";
+                $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='0' order by $this->select2 $this->select1";
 
-        }else {
+            }else {
 
-            $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='0'";
+                $sqlQuery = "Select * from `".self::table_ride."` where `customer_user_id`='$this->user_id' and `status`='0'";
 
-        }
+            }
 
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
+            if($result->num_rows>0) {
 
-            $i=0;
+                $i=0;
 
-            while($row = $result->fetch_assoc()) {
+                while($row = $result->fetch_assoc()) {
 
-                $this->data[$i] = $row;
-                ++$i;
+                    $this->data[$i] = $row;
+                    ++$i;
 
-              }
+                }
             
+            }
+
+            return $this->data;
+
+        } catch(Exception $e) {
+
+            return $e;
+
         }
-
-        return $this->data;
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
     }
 
@@ -894,26 +903,26 @@ class Ride extends Dbcon {
 
         try {
 
-        $this->user_id = $user_id;
+            $this->user_id = $user_id;
 
-        $sqlQuery = "select sum(`total_fare`) from `".self::table_ride."` where `customer_user_id` = '$this->user_id' and `status`='2'";
+            $sqlQuery = "select sum(`total_fare`) from `".self::table_ride."` where `customer_user_id` = '$this->user_id' and `status`='2'";
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
+            if($result->num_rows>0) {
 
-            $row = $result->fetch_assoc();
+                $row = $result->fetch_assoc();
 
-        }
+            }
         
 
-        return $row;
+            return $row;
 
-    } catch(Exception $e) {
+        } catch(Exception $e) {
 
-        return $e;
+            return $e;
 
-    }
+        }
 
     }
 
@@ -924,22 +933,22 @@ class Ride extends Dbcon {
 
         try {
 
-        $sqlQuery = "select sum(`total_fare`) from `".self::table_ride."` where  `status`='2'";
+            $sqlQuery = "select sum(`total_fare`) from `".self::table_ride."` where  `status`='2'";
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
+            if($result->num_rows>0) {
 
-            $row = $result->fetch_assoc();
+                $row = $result->fetch_assoc();
 
-        }
+            }
         
 
-        return $row;
+            return $row;
 
-    } catch(Exception $e) {
+        } catch(Exception $e) {
 
-        return $e;
+            return $e;
 
     }
 
@@ -952,28 +961,28 @@ class Ride extends Dbcon {
 
         try {
 
-        $this->ride_id = $ride_id;
+            $this->ride_id = $ride_id;
 
-        $sqlQuery = "update `".self::table_ride."` set `status`='0' where `ride_id`='$this->ride_id' and `status`='1'";
+            $sqlQuery = "update `".self::table_ride."` set `status`='0' where `ride_id`='$this->ride_id' and `status`='1'";
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
 
-        if($result == true) {
+            if($result == true) {
 
-            return 1;
+                return 1;
 
-        }else {
+            }else {
 
-            return 0;
+                return 0;
+
+            }
+
+        } catch(Exception $e) {
+
+            return $e;
 
         }
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
     }
 
@@ -984,28 +993,28 @@ class Ride extends Dbcon {
 
         try {
 
-        $this->ride_id = $ride_id;
+            $this->ride_id = $ride_id;
 
-        $sqlQuery = "update `".self::table_ride."` set `status`='2' where `ride_id`='$this->ride_id' and `status`='1'";
+            $sqlQuery = "update `".self::table_ride."` set `status`='2' where `ride_id`='$this->ride_id' and `status`='1'";
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
 
-        if($result == true) {
+            if($result == true) {
 
-            return 1;
+                return 1;
 
-        }else {
+            }else {
 
-            return 0;
+                return 0;
+
+            }
+
+        } catch(Exception $e) {
+
+            return $e;
 
         }
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
     }
 
@@ -1016,28 +1025,32 @@ class Ride extends Dbcon {
 
         try {
 
-        $this->ride_id = $ride_id;
+            $this->ride_id = $ride_id;
 
-        $sqlQuery = "Select * from `".self::table_ride."` FULL  JOIN `tbl_user` ON customer_user_id = tbl_user.user_id  where `ride_id`='$this->ride_id'";
+            $sqlQuery = "Select * from `".self::table_ride."` FULL  JOIN `tbl_user` ON customer_user_id = tbl_user.user_id  where `ride_id`='$this->ride_id'";
 
-        $result = $this->connect->query($sqlQuery);
+            $result = $this->connect->query($sqlQuery);
 
-        if($result->num_rows>0) {
-            $i=0;
-            while($row = $result->fetch_assoc()) {
-                $this->data[$i] = $row;
-                ++$i;
-              }
+            if($result->num_rows>0) {
+
+                $i=0;
+
+                while($row = $result->fetch_assoc()) {
+
+                    $this->data[$i] = $row;
+                    ++$i;
+
+                }
             
+            }
+
+            return $this->data;
+
+        } catch(Exception $e) {
+
+            return $e;
+
         }
-
-        return $this->data;
-
-    } catch(Exception $e) {
-
-        return $e;
-
-    }
 
 
 

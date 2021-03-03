@@ -495,6 +495,7 @@ $('#GetPendingRides').on('click',function(){
 });
 
 function GetPendingRides() {
+  
   var select1 = $('#select1').val();
 var select2 = $('#select2').val();
 $("th").css("display","none");
@@ -526,7 +527,9 @@ $.ajax({
       }
 
     }
+
 });
+
 }
 
 //----------------------------------Get all The Details of Rides of a Particular user--------------------------
@@ -551,9 +554,9 @@ $('#usersheading').hide();
 function GetAllRides() {
 
   var select1 = $('#select1').val();
-var select2 = $('#select2').val();
-$("th").css("display","none");
-$("td").css("display","none");
+  var select2 = $('#select2').val();
+  $("th").css("display","none");
+  $("td").css("display","none");
 
   var user_id = <?php echo $_SESSION['user']['user_id']; ?>;
 
@@ -566,7 +569,7 @@ $("td").css("display","none");
       'user_id':user_id,
       'action':'GetAllRides',
     },
-    success:function(res){
+    success:function(res) {
 
       var data = JSON.parse(res);
 
@@ -595,7 +598,8 @@ $("td").css("display","none");
       }
 
     }
-  })
+
+  });
 
 
 }
@@ -613,7 +617,8 @@ function GetTotalExpenses() {
       'user_id':user_id,
       'action':'GetTotalExpenses',
     },
-    success:function(res){
+    success:function(res) {
+
       var data = JSON.parse(res);
 
    
@@ -639,7 +644,7 @@ function CancelRide(ride_id) {
       'ride_id':id,
       'action':'CancelRide',
     },
-    success:function(res){
+    success:function(res) {
 
       if(res==1) {
 
