@@ -90,7 +90,7 @@ include_once "array.php";
 
   <label class="input-group-text" for="luggage">Luggages</label>
 
-  <input type="text" class="form-control" placeholder="Enter Luggage in KG" name="weight" id="luggage">
+  <input type="number" class="form-control" placeholder="Enter Luggage in KG" name="weight" id="luggage">
 </div>
 
 <div class="input-group mb-3 mySelect">
